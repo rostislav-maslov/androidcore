@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+
+    }
+}
+
+def verMoxy = '1.5.3'
+def verKotlin = '1.2.41'
+def verSupport = '27.1.1'
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$verKotlin"
+
+    //rx android
+    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api 'io.reactivex.rxjava2:rxjava:2.1.13'
+
+    api "com.android.support:appcompat-v7:$verSupport"
+
+    //moxy
+    api "com.arello-mobile:moxy:$verMoxy"
+    api "com.arello-mobile:moxy-app-compat:$verMoxy"
+}
