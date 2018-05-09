@@ -21,7 +21,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun isEquals(equals: Boolean) {
-        showError(message = "Equals $equals")
+        showError(message = "${UbUtils.getString(R.string.app_name)}. Equals $equals")
     }
 
     fun hideTest(v : View) {
