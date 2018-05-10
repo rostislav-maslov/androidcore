@@ -1,9 +1,10 @@
-package com.ub.utils
+package com.ub.utils.api
 
+import com.ub.utils.LogUtils
 import io.reactivex.exceptions.CompositeException
 import io.reactivex.functions.Consumer
 
-abstract class ApiExceptionObservable(private val tag: String, private vararg val exceptionPair: Pair<Exception, String>) : Consumer<Throwable> {
+abstract class ApiExceptionObservable(private val tag: String, private vararg val exceptionPair: Pair<Throwable, String>) : Consumer<Throwable> {
 
     private val defaultMessage = "Undefined error"
 
@@ -26,8 +27,11 @@ abstract class ApiExceptionObservable(private val tag: String, private vararg va
      * @param error - ошибка для построения сообщения об ошибке
      */
     private fun buildMessage(error : Throwable?) : String {
-        return exceptionPair.filter { it.first == error }
-            .map { it.second }[0]
+        var message = ""
+
+        //TODO generating message
+
+        return message
     }
 
     /**
@@ -45,4 +49,22 @@ abstract class ApiExceptionObservable(private val tag: String, private vararg va
 
     abstract fun call(message: String)
     abstract fun unauthorized()
+
+    companion object {
+        private const val TAG = "ApiExceptionObservable"
+
+        private const val PHONE_KEY = "phone"
+        private const val CODE_KEY = "code"
+        private const val REFRESH_KEY = "refreshToken"
+        private const val INVALID = "error.invalid"
+        private const val NOT_FOUND = "error.notFound"
+        private const val USER_BLOCKED = "error.user.blocked"
+        private const val USER_EXISTS = "error.userExists"
+        private const val USER_NOT_EXISTS = "error.userNotExists"
+        private const val SMS_TIMEOUT = "error.sms.timeout"
+        private const val LIMIT_REACHED = "error.limitReached"
+        private const val TOKEN_EXPIRED = "error.token.expired"
+        private const val REQUEST_ERROR = "error.request.error"
+        private const val REQUEST_MISSING_PARAM = "request.missingRequestParam"
+    }
 }

@@ -19,15 +19,19 @@ android {
 }
 
 def verMoxy = '1.5.3'
+def verDagger = '2.16'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':ubutils')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    // testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    // kapts
     kapt "com.arello-mobile:moxy-compiler:$verMoxy"
+    kapt "com.google.dagger:dagger-compiler:$verDagger"
 }
