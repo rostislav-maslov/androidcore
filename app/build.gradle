@@ -20,6 +20,7 @@ android {
 
 def verMoxy = '1.5.3'
 def verDagger = '2.16'
+def verFirebase = '15.0.2'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -34,4 +35,8 @@ dependencies {
     // kapts
     kapt "com.arello-mobile:moxy-compiler:$verMoxy"
     kapt "com.google.dagger:dagger-compiler:$verDagger"
+
+
+    implementation "com.google.firebase:firebase-core:$verFirebase"
+    implementation "com.google.firebase:firebase-messaging:$verFirebase"
 }
