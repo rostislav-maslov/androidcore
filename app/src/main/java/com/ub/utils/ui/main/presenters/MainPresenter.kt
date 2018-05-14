@@ -3,7 +3,6 @@ package com.ub.utils.ui.main.presenters
 import com.arellomobile.mvp.InjectViewState
 import com.ub.utils.BaseApplication
 import com.ub.utils.LogUtils
-import com.ub.utils.Notification
 import com.ub.utils.base.BasePresenter
 import com.ub.utils.ui.main.views.MainView
 import com.ub.utils.containsIgnoreCase
