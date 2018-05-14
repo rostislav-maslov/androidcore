@@ -25,14 +25,7 @@ object UbNotify {
     class LocalBuilder(private val context: Context, @DrawableRes private val smallIcon: Int, private val title: String, private val message: String) {
 
         private lateinit var channel: NotificationChannel
-        private var id: Int? = null
         private var params: (Notification.Builder.() -> Unit)? = null
-
-        fun setId(id: Int) : LocalBuilder {
-            this.id = id
-
-            return this
-        }
 
         fun setChannelParams(id: String, name: String, channelParams : (NotificationChannel.() -> Unit)?) : LocalBuilder {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -73,16 +66,16 @@ object UbNotify {
             return builder.build()
         }
 
-        fun show() {
+        fun show(id: Int = DEFAULT_ID) {
             val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
 
             if (manager != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (manager.areNotificationsEnabled()) {
-                        manager.notify(id ?: DEFAULT_ID, build())
+                        manager.notify(id, build())
                     }
                 } else {
-                    manager.notify(id ?: DEFAULT_ID, build())
+                    manager.notify(id, build())
                 }
             }
         }

@@ -35,12 +35,11 @@ class MainActivity : BaseActivity(), MainView {
     fun showPush(v : View) {
         UbNotify.Builder(this)
             .fromLocal(android.R.drawable.ic_dialog_alert, "title", "message very long for two string")
-            .setId(random.nextInt())
             .setChannelParams(random.nextLong().toString(), random.nextLong().toString(), null)
             .setParams {
                 setAutoCancel(true)
             }
-            .show()
+            .show(random.nextInt())
     }
 
     fun hideTest(v : View) {
