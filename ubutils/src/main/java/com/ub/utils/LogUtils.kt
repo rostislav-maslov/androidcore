@@ -16,7 +16,7 @@ object LogUtils {
         this.consumerString = consumer
     }
 
-    fun logError(tag: String, message: String, throwable: Throwable) {
+    fun e(tag: String, message: String, throwable: Throwable) {
         if (BuildConfig.DEBUG) {
             Log.e(tag, message, throwable)
         } else {
@@ -24,7 +24,7 @@ object LogUtils {
         }
     }
 
-    fun logError(tag: String, message: String) {
+    fun e(tag: String, message: String) {
         if (BuildConfig.DEBUG) {
             Log.e(tag, message)
         } else {
@@ -32,19 +32,19 @@ object LogUtils {
         }
     }
 
-    fun logInfo(tag: String, message: String) {
+    fun i(tag: String, message: String) {
         if (BuildConfig.DEBUG) {
             Log.i(tag, message)
         }
     }
 
-    fun logDebug(tag: String, message: String) {
+    fun d(tag: String, message: String) {
         if (BuildConfig.DEBUG) {
             Log.d(tag, message)
         }
     }
 
-    fun logWarning(tag: String, message: String) {
+    fun w(tag: String, message: String) {
         if (BuildConfig.DEBUG) {
             Log.w(tag, message)
         } else {
@@ -52,7 +52,7 @@ object LogUtils {
         }
     }
 
-    fun logWarning(tag: String, throwable: Throwable) {
+    fun w(tag: String, throwable: Throwable) {
         if (BuildConfig.DEBUG) {
             Log.w(tag, throwable)
         } else {
@@ -60,7 +60,7 @@ object LogUtils {
         }
     }
 
-    fun log(tag: String, message: String) {
+    fun v(tag: String, message: String) {
         if (BuildConfig.DEBUG) {
             Log.v(tag, message)
         } else {

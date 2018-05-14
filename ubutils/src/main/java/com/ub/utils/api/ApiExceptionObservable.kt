@@ -41,9 +41,9 @@ abstract class ApiExceptionObservable(private val tag: String, private vararg va
      */
     private fun logError(error : Throwable?) {
         if (error == null) {
-            LogUtils.logError(tag, defaultMessage)
+            LogUtils.e(tag, defaultMessage)
         } else {
-            LogUtils.logError(tag, error.message ?: defaultMessage, error)
+            LogUtils.e(tag, error.message ?: defaultMessage, error)
         }
     }
 

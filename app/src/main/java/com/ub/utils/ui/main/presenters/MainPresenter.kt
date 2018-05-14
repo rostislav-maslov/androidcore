@@ -28,7 +28,7 @@ class MainPresenter : BasePresenter<MainView>() {
             .delay(100, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ viewState.done() },
-                { LogUtils.logError("POST", it.message ?: "Error", it) })
+                { LogUtils.e("POST", it.message ?: "Error", it) })
     }
 
     fun isEquals() {

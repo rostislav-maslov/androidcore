@@ -121,7 +121,7 @@ fun getIPAddress(useIPv4: Boolean): String {
             }
         }
     } catch (ex: Exception) {
-        LogUtils.logError("IpAddress", ex.message ?: "IP Error", ex)
+        LogUtils.e("IpAddress", ex.message ?: "IP Error", ex)
     }
     // for now eat exceptions
     return ""
@@ -152,7 +152,7 @@ fun hideSoftKeyboard(context: Context) {
         inputMethodManager.hideSoftInputFromWindow((context as Activity).currentFocus!!.windowToken, 0)
         context.currentFocus!!.clearFocus()
     } catch (e: NullPointerException) {
-        LogUtils.logError("KeyBoard", "NULL point exception in input method service")
+        LogUtils.e("KeyBoard", "NULL point exception in input method service")
     }
 
 }
