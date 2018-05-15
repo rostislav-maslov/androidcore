@@ -1,11 +1,11 @@
 package com.ub.utils
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.support.annotation.DrawableRes
+import android.support.v4.app.NotificationCompat
 
 @Suppress("DEPRECATION")
 @SuppressWarnings("unused")
@@ -26,7 +26,7 @@ object UbNotify {
     class LocalBuilder(private val context: Context, @DrawableRes private val smallIcon: Int, private val title: String, private val message: String) {
 
         private lateinit var channel: NotificationChannel
-        private var params: (Notification.Builder.() -> Unit)? = null
+        private var params: (NotificationCompat.Builder.() -> Unit)? = null
 
         fun setChannelParams(id: String, name: String, channelParams : (NotificationChannel.() -> Unit)?) : LocalBuilder {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -37,7 +37,7 @@ object UbNotify {
             return this
         }
 
-        fun setParams(params : Notification.Builder.() -> Unit) : LocalBuilder {
+        fun setParams(params : NotificationCompat.Builder.() -> Unit) : LocalBuilder {
             this.params = params
 
             return this
@@ -53,9 +53,9 @@ object UbNotify {
 
                 manager?.createNotificationChannel(channel)
 
-                Notification.Builder(context, channel.id)
+                NotificationCompat.Builder(context, channel.id)
             } else {
-                Notification.Builder(context)
+                NotificationCompat.Builder(context)
             }
 
             builder.setContentTitle(title)
