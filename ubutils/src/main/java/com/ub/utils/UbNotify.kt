@@ -37,6 +37,11 @@ object UbNotify {
             return this
         }
 
+        /**
+         * Исполняется после [show]
+         * Т.е. расчитывать значение id в этом методе - не самая лучшая идея
+         * Метод [show] захватит значение переменной id раньше, чем он расчитается тут
+         */
         fun setParams(params : NotificationCompat.Builder.() -> Unit) : LocalBuilder {
             this.params = params
 
