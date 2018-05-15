@@ -17,7 +17,7 @@ object UbNotify {
 
     class Builder(private val context: Context) {
 
-        fun fromLocal(icon: Int, title: String, message: String) : LocalBuilder {
+        fun fromLocal(@DrawableRes icon: Int, title: String, message: String) : LocalBuilder {
             return LocalBuilder(context, icon, title, message)
         }
 
