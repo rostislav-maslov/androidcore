@@ -59,8 +59,14 @@ dependencies {
     api "com.google.dagger:dagger:$verDagger"
 }
 
-task androidReleaseJar(type: Jar, dependsOn: "assembleRelease") {
+/**
+ * Создаёт JAR-файл библиотеки в ubutils/libs/jar
+ */
+task createJar(type: Copy) {
     from "$buildDir/intermediates/intermediate-jars/release/"
+    into('libs/jar')
+    include('classes.jar')
+    rename('classes.jar', 'UbUtils.jar')
     exclude '**/BuildConfig.class'
     exclude '**/R.class'
     exclude '**/R$*.class'
