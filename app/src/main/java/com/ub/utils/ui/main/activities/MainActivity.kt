@@ -1,6 +1,5 @@
 package com.ub.utils.ui.main.activities
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -17,7 +16,6 @@ class MainActivity : BaseActivity(), MainView {
 
     private val random = Random()
 
-    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,7 +32,7 @@ class MainActivity : BaseActivity(), MainView {
 
     fun showPush(v : View) {
         UbNotify.Builder(this)
-            .fromLocal(android.R.drawable.ic_dialog_alert, "title", "message very long for two string")
+            .fromLocal(android.R.drawable.ic_dialog_alert, "Title", "Message very long for two string")
             .setChannelParams(random.nextLong().toString(), random.nextLong().toString(), null)
             .setParams {
                 setAutoCancel(true)

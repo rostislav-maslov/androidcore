@@ -30,9 +30,6 @@
     @retrofit2.http.* <methods>;
 }
 
--keep class com.ub.alibi.di.services.api.models.requests.** { *; }
--keep class com.ub.alibi.di.services.api.models.responses.** { *; }
-
 # Okhhtp
 -keepattributes Signature
 -keepattributes *Annotation*
@@ -48,3 +45,8 @@
 -dontobfuscate
 -dontoptimize
 -optimizations !code/allocation/variable
+
+# Gson
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+

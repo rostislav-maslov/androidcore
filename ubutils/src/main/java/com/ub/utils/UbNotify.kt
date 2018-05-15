@@ -7,12 +7,13 @@ import android.content.Context
 import android.os.Build
 import android.support.annotation.DrawableRes
 
+@Suppress("DEPRECATION")
 @SuppressWarnings("unused")
 object UbNotify {
 
-    const val CHANNEL_ID = "101"
-    const val CHANNEL_NAME = "Main"
-    const val DEFAULT_ID = 101
+    private const val CHANNEL_ID = "101"
+    private const val CHANNEL_NAME = "Main"
+    private const val DEFAULT_ID = 101
 
     class Builder(private val context: Context) {
 
@@ -69,13 +70,13 @@ object UbNotify {
         fun show(id: Int = DEFAULT_ID) {
             val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
 
-            if (manager != null) {
+            manager?.let {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (manager.areNotificationsEnabled()) {
-                        manager.notify(id, build())
+                    if (it.areNotificationsEnabled()) {
+                        it.notify(id, build())
                     }
                 } else {
-                    manager.notify(id, build())
+                    it.notify(id, build())
                 }
             }
         }
