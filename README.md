@@ -116,4 +116,12 @@ Yandex: [volixanov@unitbean.com](volixanov@unitbean.com)
 
 ## Соавторы
 
-be first
+* Денис Капустин
+
+Yandex: [denis.kapustin@unitbean.com](denis.kapustin@unitbean.com)
+
+
+
+* Умалт Исакхаджиев
+
+Yandex: [uisakxazhiev@unitbean.com](uisakxazhiev@unitbean.com)
