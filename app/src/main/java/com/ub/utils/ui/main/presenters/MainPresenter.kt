@@ -1,29 +1,30 @@
 package com.ub.utils.ui.main.presenters
 
 import com.arellomobile.mvp.InjectViewState
-import com.ub.utils.BaseApplication
 import com.ub.utils.LogUtils
 import com.ub.utils.base.BasePresenter
 import com.ub.utils.ui.main.views.MainView
-import com.ub.utils.containsIgnoreCase
-import com.ub.utils.di.services.ApiService
-import io.reactivex.Observable
+import com.ub.utils.di.services.api.responses.PostResponse
+import com.ub.utils.renew
+import com.ub.utils.ui.main.interactors.MainInteractor
+import com.ub.utils.ui.main.repositories.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 @InjectViewState
 class MainPresenter : BasePresenter<MainView>() {
 
-    @Inject lateinit var api : ApiService
-
-    init {
-        BaseApplication.appComponent.inject(this)
-    }
+    private val interactor = MainInteractor(MainRepository())
+    private val list = ArrayList<PostResponse>()
 
     fun load() {
-        api.api.loadPosts()
+        interactor.loadPosts()
+            .map {
+                list.renew(it)
+            }
             .subscribeOn(Schedulers.io())
             .delay(100, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
@@ -31,12 +32,15 @@ class MainPresenter : BasePresenter<MainView>() {
                 { LogUtils.e("POST", it.message ?: "Error", it) })
     }
 
-    fun isEquals() {
-        Observable.just(arrayListOf("Test", "TEst", "TESt", "TEST"))
-            .map {
-                return@map it.containsIgnoreCase("test")
-            }
+    fun generatePushContent() {
+        interactor.generatePushContent(list)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { viewState.isEquals(it) }
+            .subscribe(Consumer { viewState.showPush(it) })
+    }
+
+    fun isEquals() {
+        interactor.isEquals()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(Consumer { viewState.isEquals(it) })
     }
 }

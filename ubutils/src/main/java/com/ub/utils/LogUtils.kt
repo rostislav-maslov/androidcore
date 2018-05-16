@@ -5,14 +5,14 @@ import com.ub.ubutils.BuildConfig
 
 object LogUtils {
 
-    private var consumerThrowable : ((throwable : Throwable) -> Void)? = null
-    private var consumerString : ((error : String) -> Void)? = null
+    private var consumerThrowable : ((throwable : Throwable) -> Unit)? = null
+    private var consumerString : ((error : String) -> Unit)? = null
 
-    fun setThrowableLogger(consumer: (throwable : Throwable) -> Void) {
+    fun setThrowableLogger(consumer: (throwable : Throwable) -> Unit) {
         this.consumerThrowable = consumer
     }
 
-    fun setMessageLogger(consumer: (message : String) -> Void) {
+    fun setMessageLogger(consumer: (message : String) -> Unit) {
         this.consumerString = consumer
     }
 

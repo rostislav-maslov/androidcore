@@ -30,14 +30,18 @@ class MainActivity : BaseActivity(), MainView {
         showError(message = "${UbUtils.getString(R.string.app_name)}. Equals $equals")
     }
 
-    fun showPush(v : View) {
+    override fun showPush(content: Pair<String, String>) {
         UbNotify.Builder(this)
-            .fromLocal(android.R.drawable.ic_dialog_alert, "Title", "Message very long for two string")
-            .setChannelParams(random.nextLong().toString(), random.nextLong().toString(), null)
+            .fromLocal(android.R.drawable.ic_dialog_alert, content.first, content.second)
+            .setChannelParams(content.first, content.second, null)
             .setParams {
                 setAutoCancel(true)
             }
             .show(random.nextInt())
+    }
+
+    fun showPush(v : View) {
+        presenter.generatePushContent()
     }
 
     fun hideTest(v : View) {

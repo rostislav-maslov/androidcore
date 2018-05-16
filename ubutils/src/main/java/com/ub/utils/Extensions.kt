@@ -24,6 +24,12 @@ fun AlertDialog.isNotShowing(): Boolean = !isShowing
 
 fun Disposable.isNotDisposed(): Boolean = !isDisposed
 
+fun <T>ArrayList<T>.renew(list: Collection<T>): ArrayList<T> {
+    clear()
+    addAll(list)
+    return this
+}
+
 fun Collection<String>.containsIgnoreCase(value: String): Boolean {
     return this
         .firstOrNull()
