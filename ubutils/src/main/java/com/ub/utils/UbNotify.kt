@@ -11,9 +11,14 @@ import android.support.v4.app.NotificationCompat
 @SuppressWarnings("unused")
 object UbNotify {
 
-    private const val CHANNEL_ID = "101"
-    private const val CHANNEL_NAME = "Main"
     private const val DEFAULT_ID = 101
+
+    /**
+     * Данные значения нужны для того, чтобы создать канал уведомлений, если он не задан явно
+     * Изменять их целесообразно только если не вызывается метод [LocalBuilder.setChannelParams] для создания уведомления
+     */
+    var defaultChannelId = "101"
+    var defaultChannelName = "Main"
 
     class Builder(private val context: Context) {
 
@@ -28,7 +33,7 @@ object UbNotify {
         private lateinit var channel: NotificationChannel
         private var params: (NotificationCompat.Builder.() -> Unit)? = null
 
-        fun setChannelParams(id: String, name: String, channelParams : (NotificationChannel.() -> Unit)?) : LocalBuilder {
+        fun setChannelParams(id: String, name: String, channelParams: (NotificationChannel.() -> Unit)?) : LocalBuilder {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
                 channelParams?.invoke(channel)
@@ -48,14 +53,19 @@ object UbNotify {
             return this
         }
 
+        /**
+         *
+         * Во время исполнения создаст канал уведомлений, который был проинициализирован.
+         * Если этого не было сделано явно, создаст канал по-умолчанию [defaultChannelId], [defaultChannelName]
+         * @return собранное уведомление
+         */
         fun build() : android.app.Notification {
-            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-
             val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if (!this::channel.isInitialized) {
-                    channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+                    channel = NotificationChannel(defaultChannelId, defaultChannelName, NotificationManager.IMPORTANCE_HIGH)
                 }
 
+                val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
                 manager?.createNotificationChannel(channel)
 
                 NotificationCompat.Builder(context, channel.id)
