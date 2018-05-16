@@ -20,6 +20,7 @@ View.invisible
 View.gone
 AlertDialog.isNotShowing(): Boolean
 Disposable.isNotDisposed(): Boolean
+<T>ArrayList<T>.renew(list: Collection<T>): ArrayList<T>
 Collection<String>.containsIgnoreCase(value: String): Boolean
 View.animator(property Property<T, Float>, vararg values Float): ObjectAnimator
 View.animator(property String, vararg values Float): ObjectAnimator
