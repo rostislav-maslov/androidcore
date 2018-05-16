@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog
 import android.util.Property
 import android.util.TypedValue
 import android.view.View
+import io.reactivex.disposables.Disposable
 
 fun View.dpToPx(dp : Int): Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), this.context.resources.displayMetrics)
@@ -19,7 +20,9 @@ inline val View.invisible: View
 inline val View.gone: View
     get() = apply { visibility = View.GONE }
 
-inline fun AlertDialog.isNotShowing(): Boolean = !isShowing
+fun AlertDialog.isNotShowing(): Boolean = !isShowing
+
+fun Disposable.isNotDisposed(): Boolean = !isDisposed
 
 fun Collection<String>.containsIgnoreCase(value: String): Boolean {
     return this
