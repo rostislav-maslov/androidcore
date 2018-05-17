@@ -36,6 +36,7 @@ isNetworkException(error: Throwable): Boolea
 isBrokenSamsungDevice(): Boolean
 hideSoftKeyboard(context: Context
 openSoftKeyboard(context: Context, view: View)
+openMarket(context: Context)
 ```
 
 Библиотека предоставляет конечному проекту следующие зависимости.
