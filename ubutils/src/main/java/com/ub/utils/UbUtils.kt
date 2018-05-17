@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.support.annotation.StringRes
 import android.view.View
@@ -163,4 +165,17 @@ fun hideSoftKeyboard(context: Context) {
 fun openSoftKeyboard(context: Context, view: View) {
     val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+}
+
+/**
+ * Открывает страницу приложения в Google Play Market
+ */
+fun openMarket(context: Context) {
+    val uri = Uri.parse("market://details?id=" + context.packageName)
+    val market = Intent(Intent.ACTION_VIEW, uri)
+    if (market.resolveActivity(context.packageManager) != null) {
+        context.startActivity(market)
+    } else {
+        LogUtils.e("LaunchMarket", "Not found Google Play Market")
+    }
 }
