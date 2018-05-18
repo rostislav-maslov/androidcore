@@ -3,6 +3,7 @@ package com.ub.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -169,13 +170,21 @@ fun openSoftKeyboard(context: Context, view: View) {
 
 /**
  * Открывает страницу приложения в Google Play Market
+ * @return - успешность операции: true - ссылка открыта, false - не открыта
  */
-fun openMarket(context: Context) {
+fun openMarket(context: Context) : Boolean {
     val uri = Uri.parse("market://details?id=" + context.packageName)
     val market = Intent(Intent.ACTION_VIEW, uri)
-    if (market.resolveActivity(context.packageManager) != null) {
+    return if (market.resolveActivity(context.packageManager) != null) {
         context.startActivity(market)
+        true
     } else {
-        LogUtils.e("LaunchMarket", "Not found Google Play Market")
+        val browser = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}"))
+        if (browser.resolveActivity(context.packageManager) != null) {
+            context.startActivity(browser)
+            true
+        } else {
+            false
+        }
     }
 }
