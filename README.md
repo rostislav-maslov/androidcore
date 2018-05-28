@@ -41,6 +41,7 @@ def verKotlin = '1.2.41'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
+def verCoroutines = '0.22.5'
 
   // app compat
   api "com.android.support:appcompat-v7:$verSupport"
@@ -70,6 +71,10 @@ def verDagger = '2.16'
 
   //dagger 2
   api "com.google.dagger:dagger:$verDagger"
+  
+  // kotlin coroutines
+  api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines"
+  api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$verCoroutines"
 ```
 
 Следует учесть, что аттрибуты **kapt** необходимо подключать отдельно в gradle-файле финального проекта
