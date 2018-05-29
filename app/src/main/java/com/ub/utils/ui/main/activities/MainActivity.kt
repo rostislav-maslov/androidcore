@@ -1,6 +1,7 @@
 package com.ub.utils.ui.main.activities
 
 import android.os.Bundle
+import android.support.v4.app.NotificationCompat
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ub.utils.*
@@ -8,6 +9,11 @@ import com.ub.utils.base.BaseActivity
 import com.ub.utils.ui.main.presenters.MainPresenter
 import com.ub.utils.ui.main.views.MainView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.experimental.delay
+import okhttp3.MediaType
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import retrofit2.Response
 import java.util.*
 
 class MainActivity : BaseActivity(), MainView {
@@ -36,12 +42,34 @@ class MainActivity : BaseActivity(), MainView {
             .setChannelParams(content.first, content.second, null)
             .setParams {
                 setAutoCancel(true)
+                setStyle(NotificationCompat.BigTextStyle().bigText(content.second))
             }
             .show(random.nextInt())
     }
 
     fun showPush(v : View) {
         presenter.generatePushContent()
+    }
+
+    fun tokenUpdater(v: View) {
+        var isError = true
+        val builder = StringBuilder()
+        refreshTokenLaunch( {
+            LogUtils.d("WORK", "START")
+            builder.append("WORK START\n")
+            delay(1000)
+            if (isError) {
+                isError = false
+                throw HttpException(Response.error<String>(401, ResponseBody.create(MediaType.parse("text/plain"), "Test error")))
+            }
+            builder.append("WORK DONE")
+            LogUtils.d("WORK", "DONE")
+            showPush(Pair("Token updater", builder.toString()))
+        }, {
+            delay(250)
+            builder.append("TOKEN UPDATED\n")
+            LogUtils.e("TOKEN", "UPDATED")
+        } )
     }
 
     fun hideTest(v : View) {

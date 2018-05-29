@@ -86,3 +86,9 @@ task createJar(type: Copy) {
     exclude '**/R.class'
     exclude '**/R$*.class'
 }
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
