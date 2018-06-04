@@ -27,6 +27,7 @@ Collection<String>.containsIgnoreCase(value: String): Boolean
 ```kotlin
 getString(@StringRes id: Int, vararg parameters: Any) : String
 isValidPhoneNumber(number: String): Boolean
+isValidEmail(email: String): Boolean
 getIPAddress(useIPv4: Boolean): String
 isNetworkException(error: Throwable): Boolea
 isBrokenSamsungDevice(): Boolean
