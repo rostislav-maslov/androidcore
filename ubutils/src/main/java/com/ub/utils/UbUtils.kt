@@ -98,6 +98,13 @@ fun isValidPhoneNumber(number: String): Boolean {
 }
 
 /**
+ * Проверка на валидность введенного почтового адреса
+ */
+fun isValidEmail(email: String): Boolean {
+    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+}
+
+/**
  * Получение текущего IP-адреса устройства
  */
 fun getIPAddress(useIPv4: Boolean): String {
