@@ -15,6 +15,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "0.6.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -28,6 +29,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 def verMoxy = '1.5.3'
@@ -38,6 +43,14 @@ def verDagger = '2.16'
 def verCoroutines='0.22.5'
 
 dependencies {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation 'org.mockito:mockito-core:2.16.0'
+    testImplementation 'org.assertj:assertj-core:3.9.1'
+    testImplementation 'org.robolectric:robolectric:3.2.2'
+    testImplementation 'org.robolectric:shadows-support-v4:3.3.2'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$verKotlin"
 
     // app compat

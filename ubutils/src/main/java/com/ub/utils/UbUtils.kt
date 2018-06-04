@@ -20,7 +20,7 @@ import java.util.*
 object UbUtils {
     private var context : Context? = null
 
-    fun init(context : Application) {
+    fun init(context : Context) {
         this.context = context
     }
 
