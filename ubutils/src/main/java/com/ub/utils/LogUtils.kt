@@ -10,6 +10,7 @@ class LogUtils {
         private var consumerThrowable : ((throwable : Throwable) -> Unit)? = null
         private var consumerString : ((error : String) -> Unit)? = null
         private var isDebug = true
+        private var defaultMessage = "Undefined error"
 
         @JvmStatic
         fun setThrowableLogger(consumer: (throwable : Throwable) -> Unit) {
@@ -22,15 +23,20 @@ class LogUtils {
         }
 
         @JvmStatic
+        fun setDefaultMessage(message: String) {
+            this.defaultMessage = message
+        }
+
+        @JvmStatic
         fun init(isDebug: Boolean) {
             this.isDebug = isDebug
         }
 
         @Keep
         @JvmStatic
-        fun e(tag: String, message: String, throwable: Throwable) {
+        fun e(tag: String, message: String?, throwable: Throwable) {
             if (isDebug) {
-                Log.e(tag, message, throwable)
+                Log.e(tag, message ?: defaultMessage, throwable)
             } else {
                 consumerThrowable?.invoke(throwable)
             }
@@ -38,37 +44,37 @@ class LogUtils {
 
         @Keep
         @JvmStatic
-        fun e(tag: String, message: String) {
+        fun e(tag: String, message: String?) {
             if (isDebug) {
-                Log.e(tag, message)
+                Log.e(tag, message ?: defaultMessage)
             } else {
-                consumerString?.invoke(message)
+                consumerString?.invoke(message ?: defaultMessage)
             }
         }
 
         @Keep
         @JvmStatic
-        fun i(tag: String, message: String) {
+        fun i(tag: String, message: String?) {
             if (isDebug) {
-                Log.i(tag, message)
+                Log.i(tag, message ?: defaultMessage)
             }
         }
 
         @Keep
         @JvmStatic
-        fun d(tag: String, message: String) {
+        fun d(tag: String, message: String?) {
             if (isDebug) {
-                Log.d(tag, message)
+                Log.d(tag, message ?: defaultMessage)
             }
         }
 
         @Keep
         @JvmStatic
-        fun w(tag: String, message: String) {
+        fun w(tag: String, message: String?) {
             if (isDebug) {
-                Log.w(tag, message)
+                Log.w(tag, message ?: defaultMessage)
             } else {
-                consumerString?.invoke(message)
+                consumerString?.invoke(message ?: defaultMessage)
             }
         }
 
@@ -84,11 +90,11 @@ class LogUtils {
 
         @Keep
         @JvmStatic
-        fun v(tag: String, message: String) {
+        fun v(tag: String, message: String?) {
             if (isDebug) {
-                Log.v(tag, message)
+                Log.v(tag, message ?: defaultMessage)
             } else {
-                consumerString?.invoke(message)
+                consumerString?.invoke(message ?: defaultMessage)
             }
         }
     }
