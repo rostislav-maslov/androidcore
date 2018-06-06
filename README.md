@@ -27,16 +27,19 @@ View.animator(property String, vararg values Float): ObjectAnimator
 ```
 - LogUtils с поддержкой кастомного обработчика ошибок (напр. Crashlytics)
 - TextAdapter абстрактый класс TextWatcherAdapter
-- UbUtils (требует инициализации в Application):
+- UbUtils (методы с * требуют вызова UbUtils.init(context) в Application):
 ```kotlin
-getString(@StringRes id: Int, vararg parameters: Any) : String
+* getString(@StringRes id: Int, vararg parameters: Any) : String
+* getResources(): Resources
+* copyTextToClipboard(text: String): Boolean
+* getStatusBarHeight(): Int
 isValidPhoneNumber(number: String): Boolean
+isValidEmail(email: String): Boolean
 getIPAddress(useIPv4: Boolean): String
 isNetworkException(error: Throwable): Boolea
 isBrokenSamsungDevice(): Boolean
 hideSoftKeyboard(context: Context
 openSoftKeyboard(context: Context, view: View)
-openMarket(context: Context)
 ```
 
 Библиотека предоставляет конечному проекту следующие зависимости.
@@ -46,6 +49,7 @@ def verKotlin = '1.2.41'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
+def verCoroutines = '0.22.5'
 
   // app compat
   api "com.android.support:appcompat-v7:$verSupport"
@@ -75,6 +79,10 @@ def verDagger = '2.16'
 
   //dagger 2
   api "com.google.dagger:dagger:$verDagger"
+  
+  // kotlin coroutines
+  api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines"
+  api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$verCoroutines"
 ```
 
 Следует учесть, что аттрибуты **kapt** необходимо подключать отдельно в gradle-файле финального проекта
