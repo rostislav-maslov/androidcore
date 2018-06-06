@@ -3,9 +3,8 @@ package com.ub.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.StringRes
@@ -33,7 +32,54 @@ object UbUtils {
             return it.getString(id, parameters)
         }
 
-        throw IllegalStateException("Context in UbUtils not initialized. Please call UbUtils.context = this in your Application instance")
+        throw IllegalStateException("Context in UbUtils not initialized. Please call UbUtils.init in your Application instance")
+    }
+
+    /**
+     * Получение ресурсов
+     */
+    @JvmStatic
+    fun getResources(): Resources {
+        context?.let {
+            return it.resources
+        }
+
+        throw IllegalStateException("Context in UbUtils not initialized. Please call UbUtils.init in your Application instance")
+    }
+
+    /**
+     * Копирование текста в буфер обмена
+     * @return успешность операции
+     */
+    @JvmStatic
+    fun copyTextToClipboard(text: String): Boolean {
+        context?.let {
+            val clipManager = it.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+            val clipData = ClipData.newPlainText("text", text)
+            clipManager?.let {
+                it.primaryClip = clipData
+
+                return true
+            }
+
+            return false
+        }
+
+        return false
+    }
+
+    /**
+     * Получение высоты статус-бара в пикселях
+     * @return высота статус-бара в пикселях
+     */
+    @JvmStatic
+    fun getStatusBarHeight(): Int {
+        var result = 0
+        val resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId)
+        }
+        return result
     }
 }
 
