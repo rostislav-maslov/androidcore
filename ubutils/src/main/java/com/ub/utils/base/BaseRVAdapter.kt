@@ -5,7 +5,7 @@ import android.view.View
 
 abstract class BaseRVAdapter<T : RecyclerView.ViewHolder> : RecyclerView.Adapter<T>() {
 
-    protected var listener: BaseClickListener? = null
+    var listener: BaseClickListener? = null
 }
 
 interface BaseClickListener {
