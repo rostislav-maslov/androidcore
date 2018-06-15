@@ -35,12 +35,12 @@ android {
     }
 }
 
-def verMoxy = '1.5.3'
+def verMoxy = '1.5.5'
 def verKotlin = '1.2.41'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
-def verCoroutines='0.23.0'
+def verCoroutines='0.23.2'
 
 dependencies {
     testImplementation 'junit:junit:4.12'
@@ -60,7 +60,7 @@ dependencies {
     api "com.android.support:cardview-v7:$verSupport"
     api "com.android.support:design:$verSupport"
     api "com.android.support:support-vector-drawable:$verSupport"
-    api 'com.android.support.constraint:constraint-layout:1.1.1'
+    api 'com.android.support.constraint:constraint-layout:1.1.2'
 
     //moxy
     api "com.arello-mobile:moxy:$verMoxy"
