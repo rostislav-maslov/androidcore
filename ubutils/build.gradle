@@ -36,7 +36,7 @@ android {
 }
 
 def verMoxy = '1.5.5'
-def verKotlin = '1.2.41'
+def verKotlin = '1.2.50'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
