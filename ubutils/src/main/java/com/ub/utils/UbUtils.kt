@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.*
 import android.content.res.Resources
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.StringRes
@@ -240,4 +241,15 @@ fun openMarket(context: Context) : Boolean {
             false
         }
     }
+}
+
+/**
+ * Определение, включена ли геолокация на устройстве
+ */
+fun isGpsIsEnabled(context: Context): Boolean {
+    val manager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+    val networkLocationEnabled = manager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER) == true
+    val gpsLocationEnabled = manager?.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
+
+    return networkLocationEnabled || gpsLocationEnabled
 }
