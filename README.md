@@ -40,16 +40,17 @@ isNetworkException(error: Throwable): Boolea
 isBrokenSamsungDevice(): Boolean
 hideSoftKeyboard(context: Context
 openSoftKeyboard(context: Context, view: View)
+isGpsIsEnabled(context: Context)
 ```
 
 Библиотека предоставляет конечному проекту следующие зависимости.
 ```gradle
-def verMoxy = '1.5.3'
-def verKotlin = '1.2.41'
+def verMoxy = '1.5.5'
+def verKotlin = '1.2.50'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
-def verCoroutines = '0.22.5'
+def verCoroutines = '0.23.2'
 
   // app compat
   api "com.android.support:appcompat-v7:$verSupport"
