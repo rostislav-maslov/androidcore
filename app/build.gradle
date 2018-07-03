@@ -16,6 +16,9 @@ android {
     buildTypes {
 
     }
+    packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+    }
 }
 
 def verMoxy = '1.5.5'

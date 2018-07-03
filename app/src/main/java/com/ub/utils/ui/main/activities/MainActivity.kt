@@ -8,6 +8,7 @@ import com.ub.utils.*
 import com.ub.utils.base.BaseActivity
 import com.ub.utils.ui.main.presenters.MainPresenter
 import com.ub.utils.ui.main.views.MainView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : BaseActivity(), MainView {

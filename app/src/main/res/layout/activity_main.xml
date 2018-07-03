@@ -8,14 +8,6 @@
     tools:context=".ui.main.activities.MainActivity">
 
     <Button
-        android:id="@+id/btn_text_token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TOKEN UPDATER"
-        android:onClick="tokenUpdater"
-        app:layout_constraintBottom_toTopOf="@id/btn_text_push"/>
-
-    <Button
         android:id="@+id/btn_text_push"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
