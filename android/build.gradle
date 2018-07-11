@@ -1,11 +1,31 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = "AndroidCore"
+    bintrayName = "com.unitbean.core"
+    libraryName = "android"
+
+    publishedGroupId = "com.unitbean.core"
+    artifact = "android"
+    libraryVersion = "0.7.6"
+
+    libraryDescription = "Boilerplate Android code for UnitBean developers"
+    siteUrl = 'https://github.com/unitbean/androidcore'
+    gitUrl = 'https://github.com/unitbean/androidcore.git'
+    developerId = 'UnitBean'
+    developerName = 'Android developer'
+    developerEmail = 'pocteg@gmail.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 repositories {
     mavenCentral()
 }
-
-group='com.github.unitbean'
 
 android {
     compileSdkVersion 27
@@ -97,6 +117,11 @@ task createJar(type: Copy) {
     exclude '**/BuildConfig.class'
     exclude '**/R.class'
     exclude '**/R$*.class'
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }
 
 kotlin {

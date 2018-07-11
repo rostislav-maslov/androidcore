@@ -26,7 +26,7 @@ def verDagger = '2.16'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':ubutils')
+    implementation project(':android')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // testing
