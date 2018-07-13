@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.7.6"
+    libraryVersion = "0.7.7"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -34,7 +34,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "0.6.1"
+        versionName "0.7.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
