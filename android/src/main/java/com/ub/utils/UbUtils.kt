@@ -30,7 +30,7 @@ object UbUtils {
     @JvmStatic
     fun getString(@StringRes id: Int, vararg parameters: Any) : String {
         context?.let {
-            return it.getString(id, parameters)
+            return it.getString(id, *parameters)
         }
 
         throw IllegalStateException("Context in UbUtils not initialized. Please call UbUtils.init in your Application instance")
