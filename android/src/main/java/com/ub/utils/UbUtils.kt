@@ -15,6 +15,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.NetworkInterface
 import java.util.*
+import kotlin.coroutines.experimental.buildSequence
 
 @SuppressLint("StaticFieldLeak")
 object UbUtils {
@@ -81,6 +82,18 @@ object UbUtils {
             result = getResources().getDimensionPixelSize(resourceId)
         }
         return result
+    }
+}
+
+/**
+ * Ленивая последовательность элементов
+ * Идеально подходит для таймера
+ */
+val timer = buildSequence {
+    var cur = 1
+    while (true) {
+        yield(cur)
+        cur += 1
     }
 }
 
