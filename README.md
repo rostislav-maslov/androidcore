@@ -1,6 +1,6 @@
 # androidcore
 
-[![](https://jitpack.io/v/unitbean/androidcore.svg)](https://jitpack.io/#unitbean/androidcore)
+[ ![Download](https://api.bintray.com/packages/unitbean/AndroidCore/com.unitbean.core/images/download.svg) ](https://bintray.com/unitbean/AndroidCore/com.unitbean.core/_latestVersion)
 
 Библиотека включает в себя базовый набор средств и инструментов для Android-разработчика
 
@@ -46,11 +46,11 @@ isGpsIsEnabled(context: Context)
 Библиотека предоставляет конечному проекту следующие зависимости.
 ```gradle
 def verMoxy = '1.5.5'
-def verKotlin = '1.2.50'
+def verKotlin = '1.2.51'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.16'
-def verCoroutines = '0.23.2'
+def verCoroutines = '0.23.4'
 
   // app compat
   api "com.android.support:appcompat-v7:$verSupport"
@@ -88,7 +88,7 @@ def verCoroutines = '0.23.2'
 
 Следует учесть, что аттрибуты **kapt** необходимо подключать отдельно в gradle-файле финального проекта
 ```gradle
-def verMoxy = '1.5.3'
+def verMoxy = '1.5.5'
 def verDagger = '2.16'
 
   // kapts
