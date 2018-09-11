@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.8.1"
+    libraryVersion = "0.8.2"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -60,7 +60,7 @@ def verKotlin = '1.2.61'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.17'
-def verCoroutines='0.25.0'
+def verCoroutines='0.25.3'
 
 dependencies {
     testImplementation 'junit:junit:4.12'
@@ -80,7 +80,7 @@ dependencies {
     api "com.android.support:cardview-v7:$verSupport"
     api "com.android.support:design:$verSupport"
     api "com.android.support:support-vector-drawable:$verSupport"
-    api 'com.android.support.constraint:constraint-layout:1.1.2'
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
 
     //moxy
     api "com.arello-mobile:moxy:$verMoxy"
@@ -96,7 +96,7 @@ dependencies {
 
     //rx android
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.2'
 
     //dagger 2
     api "com.google.dagger:dagger:$verDagger"
