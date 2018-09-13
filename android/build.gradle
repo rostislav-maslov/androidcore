@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.8.2"
+    libraryVersion = "0.8.3"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -34,7 +34,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "0.7.8"
+        versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -60,7 +60,7 @@ def verKotlin = '1.2.61'
 def verSupport = '27.1.1'
 def verRetrofit = '2.4.0'
 def verDagger = '2.17'
-def verCoroutines='0.25.3'
+def verCoroutines='0.26.0'
 
 dependencies {
     testImplementation 'junit:junit:4.12'
