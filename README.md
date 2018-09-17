@@ -25,6 +25,18 @@ Collection<String>.containsIgnoreCase(value: String): Boolean
 View.animator(property Property<T, Float>, vararg values Float): ObjectAnimator
 View.animator(property String, vararg values Float): ObjectAnimator
 ```
+- Удобные Extension-функции для работы с `java.util.Calendar`:
+```kotlin
+Calendar.dayOfWeek
+Calendar.day
+Calendar.hours
+Calendar.minutes
+Calendar.seconds
+Calendar.milliseconds
+Calendar.addHours(hours: Int)
+Calendar.addMinutes(minutes: Int)
+Calendar.dayRoll(amount: Int)
+```
 - LogUtils с поддержкой кастомного обработчика ошибок (напр. Crashlytics)
 - TextAdapter абстрактый класс TextWatcherAdapter
 - UbUtils (методы с * требуют вызова UbUtils.init(context) в Application):
