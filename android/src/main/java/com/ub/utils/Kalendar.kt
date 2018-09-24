@@ -2,6 +2,14 @@ package com.ub.utils
 
 import java.util.*
 
+var Calendar.year
+    inline get() = this.get(Calendar.YEAR)
+    inline set(value) = this.set(Calendar.YEAR, value)
+
+var Calendar.month
+    inline get() = this.get(Calendar.MONTH)
+    inline set(value) = this.set(Calendar.MONTH, value)
+
 var Calendar.dayOfWeek
     inline get() = this.get(Calendar.DAY_OF_WEEK)
     inline set(value) = this.set(Calendar.DAY_OF_WEEK, value)
@@ -37,3 +45,5 @@ infix fun Calendar.addMinutes(minutes: Int) {
 infix fun Calendar.dayRoll(amount: Int) {
     this.roll(Calendar.DATE, amount)
 }
+
+fun Calendar.debugPrint(): String = "$day.$month.$year day of week: $dayOfWeek $hours:$minutes:$seconds:$milliseconds"
