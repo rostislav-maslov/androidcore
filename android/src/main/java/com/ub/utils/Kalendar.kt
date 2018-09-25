@@ -35,15 +35,15 @@ var Calendar.milliseconds
     inline set(value) = this.set(Calendar.MILLISECOND, value)
 
 infix fun Calendar.addHours(hours: Int) {
-    this.add(Calendar.HOUR_OF_DAY, hours)
+    timeInMillis += 1000 * 60 * 60 * hours
 }
 
 infix fun Calendar.addMinutes(minutes: Int) {
-    this.add(Calendar.MINUTE, minutes)
+    timeInMillis += 1000 * 60 * minutes
 }
 
 infix fun Calendar.dayRoll(amount: Int) {
-    this.roll(Calendar.DATE, amount)
+    timeInMillis += 1000 * 60 * 60 * 24 * amount
 }
 
 fun Calendar.debugPrint(): String = "$day.$month.$year day of week: $dayOfWeek $hours:$minutes:$seconds:$milliseconds"
