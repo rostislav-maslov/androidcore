@@ -1,6 +1,6 @@
 package com.ub.utils.ui.main.adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.ub.utils.base.BaseRVAdapter
@@ -18,7 +18,7 @@ class MainRVAdapter : BaseRVAdapter<MainRVAdapter.MainViewHolder>() {
         holder.bind(position)
     }
 
-    inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class MainViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view), View.OnClickListener {
 
         fun bind(position: Int) {
             //something

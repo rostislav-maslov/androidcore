@@ -2,13 +2,12 @@ package com.ub.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.*
 import android.content.res.Resources
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import retrofit2.HttpException

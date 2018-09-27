@@ -1,8 +1,7 @@
 package com.ub.utils
 
-import android.support.annotation.Keep
+import androidx.annotation.Keep
 import android.util.Log
-import com.ub.ubutils.BuildConfig
 
 class LogUtils {
 

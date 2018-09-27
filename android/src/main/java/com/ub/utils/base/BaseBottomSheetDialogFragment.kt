@@ -1,7 +1,7 @@
 package com.ub.utils.base
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.arellomobile.mvp.MvpDelegate
 
 abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {

@@ -1,7 +1,7 @@
 package com.ub.utils
 
 import android.animation.ObjectAnimator
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.util.Property
 import android.util.TypedValue
 import android.view.View

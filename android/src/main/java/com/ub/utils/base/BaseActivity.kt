@@ -1,10 +1,9 @@
 package com.ub.utils.base
 
-import android.support.v7.app.AlertDialog
-import com.arellomobile.mvp.MvpAppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import com.ub.utils.isNotShowing
 
-abstract class BaseActivity : MvpAppCompatActivity() {
+abstract class BaseActivity : MvpXActivity() {
 
     var alertDialog: AlertDialog? = null
 

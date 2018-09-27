@@ -1,7 +1,7 @@
 package com.ub.utils.ui.main.activities
 
 import android.os.Bundle
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ub.utils.*
