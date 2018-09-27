@@ -1,3 +1,3 @@
 package com.ub.utils.base
 
-class BaseFragment : MvpXFragment()
+abstract class BaseFragment : MvpXFragment()
