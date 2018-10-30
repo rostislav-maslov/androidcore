@@ -2,7 +2,6 @@ package com.ub.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.*
 import android.content.res.Resources
 import android.location.LocationManager
@@ -15,7 +14,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.NetworkInterface
 import java.util.*
-import kotlin.coroutines.experimental.buildSequence
 
 @SuppressLint("StaticFieldLeak")
 object UbUtils {
@@ -89,7 +87,7 @@ object UbUtils {
  * Ленивая последовательность элементов
  * Идеально подходит для таймера
  */
-val timer = buildSequence {
+val timer = sequence {
     var cur = 1
     while (true) {
         yield(cur)
