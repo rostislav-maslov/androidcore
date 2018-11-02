@@ -2,12 +2,17 @@ package com.ub.utils.base
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.channels.actor
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
+abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), CoroutineScope {
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
 
     var listener: BaseClickListener? = null
     protected var dataset: MutableList<D> = mutableListOf()
@@ -21,7 +26,7 @@ abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder>
             newList.clear()
             newList.addAll(list)
         })
-        launch(UI) {
+        launch {
             dataset.clear()
             dataset.addAll(list)
             result.dispatchUpdatesTo(this@DiffUtilAdapter)
