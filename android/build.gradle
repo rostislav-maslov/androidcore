@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.8.9"
+    libraryVersion = "0.8.10"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -59,7 +59,7 @@ def verMoxy = '1.5.5'
 def verKotlin = '1.3.0'
 def verSupport = '28.0.0'
 def verRetrofit = '2.4.0'
-def verDagger = '2.17'
+def verDagger = '2.19'
 def verCoroutines='1.0.0'
 
 dependencies {
@@ -96,7 +96,7 @@ dependencies {
 
     //rx android
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+    api 'io.reactivex.rxjava2:rxjava:2.2.3'
 
     //dagger 2
     api "com.google.dagger:dagger:$verDagger"
