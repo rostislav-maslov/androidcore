@@ -9,6 +9,7 @@ import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
+@Suppress("UNUSED")
 abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
@@ -19,7 +20,15 @@ abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder>
     private val diffCallback by lazy(LazyThreadSafetyMode.NONE) { DiffCallback() }
     private val eventActor = actor<List<D>>(capacity = Channel.CONFLATED) { for (list in channel) internalUpdate(list) }
 
-    fun update (list: List<D>) = eventActor.offer(list)
+    fun update(list: List<D>) = eventActor.offer(list)
+
+    fun updateSync(list: List<D>) {
+        diffCallback.newList.clear()
+        diffCallback.newList.addAll(list)
+        DiffUtil.calculateDiff(diffCallback).dispatchUpdatesTo(this)
+        dataset.clear()
+        dataset.addAll(list)
+    }
 
     private suspend fun internalUpdate(list: List<D>) {
         val result = DiffUtil.calculateDiff(diffCallback.apply {

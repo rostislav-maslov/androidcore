@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.8.10"
+    libraryVersion = "0.8.11"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
