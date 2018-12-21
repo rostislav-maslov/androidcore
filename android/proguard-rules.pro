@@ -41,11 +41,6 @@
 # Okio
 -dontwarn okio.**
 
-# dagger 2
--dontobfuscate
--dontoptimize
--optimizations !code/allocation/variable
-
 # Gson
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
