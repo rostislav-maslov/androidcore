@@ -22,7 +22,7 @@ android {
 }
 
 def verMoxy = '1.5.5'
-def verDagger = '2.21'
+def verDagger = '2.22.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
