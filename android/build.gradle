@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.9.1"
+    libraryVersion = "0.9.2"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -58,7 +58,7 @@ android {
 def verMoxy = '1.5.5'
 def verRetrofit = '2.5.0'
 def verDagger = '2.22.1'
-def verCoroutines='1.2.0'
+def verCoroutines='1.2.1'
 
 dependencies {
     testImplementation 'junit:junit:4.12'
