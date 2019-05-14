@@ -46,8 +46,8 @@ abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder>
         internal var newList: MutableList<D> = mutableListOf()
         override fun getOldListSize() = dataset.size
         override fun getNewListSize() = newList.size
-        override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition].getDiffId() == newList[newItemPosition].getDiffId()
-        override fun areItemsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition] == newList[newItemPosition]
+        override fun areItemsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition].getDiffId() == newList[newItemPosition].getDiffId()
+        override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition] == newList[newItemPosition]
     }
 }
 

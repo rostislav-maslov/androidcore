@@ -24,7 +24,7 @@ fun AlertDialog.isNotShowing(): Boolean = !isShowing
 
 fun Disposable.isNotDisposed(): Boolean = !isDisposed
 
-fun <T>ArrayList<T>.renew(list: Collection<T>): ArrayList<T> {
+fun <T>MutableList<T>.renew(list: Collection<T>): MutableList<T> {
     clear()
     addAll(list)
     return this
