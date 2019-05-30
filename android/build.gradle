@@ -57,7 +57,7 @@ android {
 
 def verMoxy = '1.5.5'
 def verRetrofit = '2.5.0'
-def verDagger = '2.22.1'
+def verDagger = '2.23'
 def verCoroutines='1.2.1'
 
 dependencies {
@@ -90,7 +90,7 @@ dependencies {
     api "com.squareup.retrofit2:adapter-rxjava2:$verRetrofit"
 
     // logging interceptor
-    api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
     // rx android
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
