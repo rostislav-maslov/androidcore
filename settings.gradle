@@ -1,1 +1,1 @@
-include ':app', ':ubutils'
+include ':app', ':android'

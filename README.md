@@ -1,6 +1,6 @@
 # androidcore
 
-[![](https://jitpack.io/v/unitbean/androidcore.svg)](https://jitpack.io/#unitbean/androidcore)
+[ ![Download](https://api.bintray.com/packages/unitbean/AndroidCore/com.unitbean.core/images/download.svg) ](https://bintray.com/unitbean/AndroidCore/com.unitbean.core/_latestVersion)
 
 Библиотека включает в себя базовый набор средств и инструментов для Android-разработчика
 
@@ -19,13 +19,32 @@ View.visible
 View.invisible
 View.gone
 AlertDialog.isNotShowing(): Boolean
+Disposable.isNotDisposed(): Boolean
+<T>ArrayList<T>.renew(list: Collection<T>): ArrayList<T>
 Collection<String>.containsIgnoreCase(value: String): Boolean
+View.animator(property Property<T, Float>, vararg values Float): ObjectAnimator
+View.animator(property String, vararg values Float): ObjectAnimator
+```
+- Удобные Extension-функции для работы с `java.util.Calendar`:
+```kotlin
+Calendar.dayOfWeek
+Calendar.day
+Calendar.hours
+Calendar.minutes
+Calendar.seconds
+Calendar.milliseconds
+Calendar.addHours(hours: Int)
+Calendar.addMinutes(minutes: Int)
+Calendar.dayRoll(amount: Int)
 ```
 - LogUtils с поддержкой кастомного обработчика ошибок (напр. Crashlytics)
 - TextAdapter абстрактый класс TextWatcherAdapter
-- UbUtils (требует инициализации в Application):
+- UbUtils (методы с * требуют вызова UbUtils.init(context) в Application):
 ```kotlin
-getString(@StringRes id: Int, vararg parameters: Any) : String
+* getString(@StringRes id: Int, vararg parameters: Any) : String
+* getResources(): Resources
+* copyTextToClipboard(text: String): Boolean
+* getStatusBarHeight(): Int
 isValidPhoneNumber(number: String): Boolean
 isValidEmail(email: String): Boolean
 getIPAddress(useIPv4: Boolean): String
@@ -33,26 +52,25 @@ isNetworkException(error: Throwable): Boolea
 isBrokenSamsungDevice(): Boolean
 hideSoftKeyboard(context: Context
 openSoftKeyboard(context: Context, view: View)
+isGpsIsEnabled(context: Context)
 ```
 
 Библиотека предоставляет конечному проекту следующие зависимости.
 ```gradle
-def verMoxy = '1.5.3'
-def verKotlin = '1.2.41'
-def verSupport = '27.1.1'
-def verRetrofit = '2.4.0'
-def verDagger = '2.16'
-def verCoroutines = '0.22.5'
+def verMoxy = '1.5.5'
+def verKotlin = '1.3.31'
+def verRetrofit = '2.5.0'
+def verDagger = '2.23'
+def verCoroutines = '1.2.1'
 
   // app compat
-  api "com.android.support:appcompat-v7:$verSupport"
-  api "com.android.support:support-v4:$verSupport"
-  api "com.android.support:appcompat-v7:$verSupport"
-  api "com.android.support:recyclerview-v7:$verSupport"
-  api "com.android.support:cardview-v7:$verSupport"
-  api "com.android.support:design:$verSupport"
-  api "com.android.support:support-vector-drawable:$verSupport"
-  api 'com.android.support.constraint:constraint-layout:1.1.0'
+  api 'androidx.appcompat:appcompat:1.0.2'
+  api 'androidx.legacy:legacy-support-v4:1.0.0'
+  api 'androidx.recyclerview:recyclerview:1.0.0'
+  api 'androidx.cardview:cardview:1.0.0'
+  api 'com.google.android.material:material:1.0.0'
+  api 'androidx.vectordrawable:vectordrawable:1.0.1'
+  api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
   //moxy
   api "com.arello-mobile:moxy:$verMoxy"
@@ -64,11 +82,11 @@ def verCoroutines = '0.22.5'
   api "com.squareup.retrofit2:adapter-rxjava2:$verRetrofit"
 
   //logging interceptor
-  api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+  api 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
   //rx android
-  api 'io.reactivex.rxjava2:rxandroid:2.0.2'
-  api 'io.reactivex.rxjava2:rxjava:2.1.13'
+  api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+  api 'io.reactivex.rxjava2:rxjava:2.2.8'
 
   //dagger 2
   api "com.google.dagger:dagger:$verDagger"
@@ -80,8 +98,8 @@ def verCoroutines = '0.22.5'
 
 Следует учесть, что аттрибуты **kapt** необходимо подключать отдельно в gradle-файле финального проекта
 ```gradle
-def verMoxy = '1.5.3'
-def verDagger = '2.16'
+def verMoxy = '1.5.5'
+def verDagger = '2.23'
 
   // kapts
   kapt "com.arello-mobile:moxy-compiler:$verMoxy"
@@ -90,20 +108,12 @@ def verDagger = '2.16'
 
 ## Как подключить
 
-Необходимо добавить jitpack-репо в корневой уровень зависимостей __build.gradle__
-```gradle
-allprojects {
-	repositories {
-		...
-		maven { url "https://jitpack.io" }
-	}
-}
-```
-и после этого добавить в локальный модуль следующее
+Библиотека опубликована в JCenter и доступна напрямую.
+Добавить в локальный модуль следующее
 
 ```gradle
 dependencies {
-	implementation 'com.github.unitbean:androidcore:$latest_version'
+    implementation 'com.unitbean.core:android:$latest_version'
 }
 ```
 
@@ -119,4 +129,12 @@ Yandex: [volixanov@unitbean.com](volixanov@unitbean.com)
 
 ## Соавторы
 
-be first
+* Денис Капустин
+
+Yandex: [denis.kapustin@unitbean.com](denis.kapustin@unitbean.com)
+
+
+
+* Умалт Исакхаджиев
+
+Yandex: [uisakxazhiev@unitbean.com](uisakxazhiev@unitbean.com)
