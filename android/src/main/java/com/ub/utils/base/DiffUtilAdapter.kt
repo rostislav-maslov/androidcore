@@ -2,42 +2,42 @@ package com.ub.utils.base
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ub.utils.renew
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
+
 
 @Suppress("UNUSED")
-abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), CoroutineScope {
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
+abstract class DiffUtilAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     var listener: BaseClickListener? = null
     protected var dataset: MutableList<D> = mutableListOf()
     private val diffCallback by lazy(LazyThreadSafetyMode.NONE) { DiffCallback() }
-    private val eventActor = actor<List<D>>(capacity = Channel.CONFLATED) { for (list in channel) internalUpdate(list) }
+    @ObsoleteCoroutinesApi
+    private val eventActor = actor<List<D>>(capacity = Channel.CONFLATED) {
+        for (list in channel)
+            internalUpdate(this@DiffUtilAdapter, list)
+    }
 
+    @ObsoleteCoroutinesApi
     fun update(list: List<D>) = eventActor.offer(list)
 
     fun updateSync(list: List<D>) {
-        diffCallback.newList.clear()
-        diffCallback.newList.addAll(list)
+        diffCallback.newList.renew(list)
         DiffUtil.calculateDiff(diffCallback).dispatchUpdatesTo(this)
-        dataset.clear()
-        dataset.addAll(list)
+        dataset.renew(list)
     }
 
-    private suspend fun internalUpdate(list: List<D>) {
+    private suspend fun internalUpdate(scope: CoroutineScope, list: List<D>) {
         val result = DiffUtil.calculateDiff(diffCallback.apply {
-            newList.clear()
-            newList.addAll(list)
+            newList.renew(list)
         })
-        launch {
-            dataset.clear()
-            dataset.addAll(list)
+        scope.launch {
+            dataset.renew(list)
             result.dispatchUpdatesTo(this@DiffUtilAdapter)
         }.join()
     }
@@ -46,11 +46,11 @@ abstract class DiffUtilAdapter<D : DiffViewHolder, VH : RecyclerView.ViewHolder>
         internal var newList: MutableList<D> = mutableListOf()
         override fun getOldListSize() = dataset.size
         override fun getNewListSize() = newList.size
-        override fun areItemsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition].getDiffId() == newList[newItemPosition].getDiffId()
+        override fun areItemsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition].getItemId() == newList[newItemPosition].getItemId()
         override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int) = dataset[oldItemPosition] == newList[newItemPosition]
     }
 }
 
-interface DiffViewHolder {
-    fun getDiffId(): Int
+interface DiffComparable {
+    fun getItemId(): Int
 }

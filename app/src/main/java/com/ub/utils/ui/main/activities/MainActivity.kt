@@ -32,14 +32,14 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showPush(content: Pair<String, String>) {
-        UbNotify.Builder(this)
-            .fromLocal(android.R.drawable.ic_dialog_alert, content.first, content.second)
+        UbNotify
+            .create(this, android.R.drawable.ic_dialog_alert, content.first, content.second)
             .setChannelParams(content.first, content.second, null)
             .setParams {
                 setAutoCancel(true)
                 setStyle(NotificationCompat.BigTextStyle().bigText(content.second))
             }
-            .show(random.nextInt())
+            .show(id = random.nextInt())
     }
 
     fun showPush(v : View) {

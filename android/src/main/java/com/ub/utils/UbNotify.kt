@@ -7,33 +7,32 @@ import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 
-@Suppress("DEPRECATION")
-@SuppressWarnings("unused")
+@Suppress("DEPRECATION", "UNUSED")
 object UbNotify {
 
     private const val DEFAULT_ID = 101
 
     /**
      * Данные значения нужны для того, чтобы создать канал уведомлений, если он не задан явно
-     * Изменять их целесообразно только если не вызывается метод [LocalBuilder.setChannelParams] для создания уведомления
+     * Изменять их целесообразно только если не вызывается метод [Builder.setChannelParams] для создания уведомления
      */
     var defaultChannelId = "101"
     var defaultChannelName = "Main"
 
-    class Builder(private val context: Context) {
-
-        fun fromLocal(@DrawableRes icon: Int, title: String, message: String) : LocalBuilder {
-            return LocalBuilder(context, icon, title, message)
-        }
-
+    fun create(context: Context, @DrawableRes icon: Int, title: String, message: String): Builder {
+        return Builder(context, icon, title, message)
     }
 
-    class LocalBuilder(private val context: Context, @DrawableRes private val smallIcon: Int, private val title: String, private val message: String) {
+    class Builder(private val context: Context,
+                  @DrawableRes private val smallIcon: Int,
+                  private val title: String,
+                  private val message: String) {
 
         private lateinit var channel: NotificationChannel
         private var params: (NotificationCompat.Builder.() -> Unit)? = null
+        private val manager: NotificationManager? by lazy { context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager? }
 
-        fun setChannelParams(id: String, name: String, channelParams: (NotificationChannel.() -> Unit)?) : LocalBuilder {
+        fun setChannelParams(id: String, name: String, channelParams: (NotificationChannel.() -> Unit)?): Builder {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
                 channelParams?.invoke(channel)
@@ -47,7 +46,7 @@ object UbNotify {
          * Т.е. расчитывать значение id в этом методе - не самая лучшая идея
          * Метод [show] захватит значение переменной id раньше, чем он расчитается тут
          */
-        fun setParams(params : NotificationCompat.Builder.() -> Unit) : LocalBuilder {
+        fun setParams(params: NotificationCompat.Builder.() -> Unit): Builder {
             this.params = params
 
             return this
@@ -59,13 +58,12 @@ object UbNotify {
          * Если этого не было сделано явно, создаст канал по-умолчанию [defaultChannelId], [defaultChannelName]
          * @return собранное уведомление
          */
-        fun build() : android.app.Notification {
+        fun build(): android.app.Notification {
             val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if (!this::channel.isInitialized) {
                     channel = NotificationChannel(defaultChannelId, defaultChannelName, NotificationManager.IMPORTANCE_HIGH)
                 }
 
-                val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
                 manager?.createNotificationChannel(channel)
 
                 NotificationCompat.Builder(context, channel.id)
@@ -82,16 +80,14 @@ object UbNotify {
             return builder.build()
         }
 
-        fun show(id: Int = DEFAULT_ID) {
-            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-
+        fun show(tag: String? = null, id: Int = DEFAULT_ID) {
             manager?.let {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (it.areNotificationsEnabled()) {
-                        it.notify(id, build())
+                        it.notify(tag, id, build())
                     }
                 } else {
-                    it.notify(id, build())
+                    it.notify(tag, id, build())
                 }
             }
         }
