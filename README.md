@@ -6,11 +6,10 @@
 
 Ориентирована на проекты, основным языком которых является [**Kotlin**](https://github.com/JetBrains/kotlin)
 
-Основная архитектура базируется на MVP, и частной её реализации, предоставляемой библиотекой [**Moxy**](https://github.com/Arello-Mobile/Moxy)
+Основная архитектура базируется на MVP, и частной её реализации, предоставляемой библиотекой [**Moxy**](https://github.com/moxy-community/Moxy)
 
 ## Что содержит
 
-- BaseActivity, BaseFragment, BaseDialogFragment, BasePresenter, BaseView
 - UbNotify (средство показа пуш-уведомлений, инкапсулирующий в себе весь boilerplate-код)
 - Extension-функции: 
 ```kotlin
@@ -57,7 +56,7 @@ isGpsIsEnabled(context: Context)
 
 Библиотека предоставляет конечному проекту следующие зависимости.
 ```gradle
-def verMoxy = '1.5.5'
+def verMoxy = '1.0.13'
 def verKotlin = '1.3.31'
 def verRetrofit = '2.5.0'
 def verDagger = '2.23'
@@ -73,8 +72,9 @@ def verCoroutines = '1.2.1'
   api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
   //moxy
-  api "com.arello-mobile:moxy:$verMoxy"
-  api "com.arello-mobile:moxy-app-compat:$verMoxy"
+  api "com.github.moxy-community:moxy:$verMoxy"
+  api "com.github.moxy-community:moxy-androidx:$verMoxy"
+  api "com.github.moxy-community:moxy-material:$verMoxy"
 
   //retrofit 2
   api "com.squareup.retrofit2:retrofit:$verRetrofit"
@@ -98,11 +98,11 @@ def verCoroutines = '1.2.1'
 
 Следует учесть, что аттрибуты **kapt** необходимо подключать отдельно в gradle-файле финального проекта
 ```gradle
-def verMoxy = '1.5.5'
+def verMoxy = '1.0.13'
 def verDagger = '2.23'
 
   // kapts
-  kapt "com.arello-mobile:moxy-compiler:$verMoxy"
+  kapt "com.github.moxy-community:moxy-compiler:$verMoxy"
   kapt "com.google.dagger:dagger-compiler:$verDagger"
 ```
 
