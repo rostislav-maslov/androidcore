@@ -3,17 +3,18 @@ package com.ub.utils.ui.main.activities
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import android.view.View
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ub.utils.*
 import com.ub.utils.base.BaseActivity
 import com.ub.utils.ui.main.presenters.MainPresenter
 import com.ub.utils.ui.main.views.MainView
 import kotlinx.android.synthetic.main.activity_main.*
+import moxy.presenter.InjectPresenter
 import java.util.*
 
 class MainActivity : BaseActivity(), MainView {
 
-    @InjectPresenter lateinit var presenter : MainPresenter
+    @InjectPresenter
+    lateinit var presenter : MainPresenter
 
     private val random = Random()
 

@@ -12,9 +12,8 @@ import kotlinx.coroutines.launch
 
 
 @Suppress("UNUSED")
-abstract class DiffUtilAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
+abstract class DiffUtilAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder> : BaseRVAdapter<VH>(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
-    var listener: BaseClickListener? = null
     protected var dataset: MutableList<D> = mutableListOf()
     private val diffCallback by lazy(LazyThreadSafetyMode.NONE) { DiffCallback() }
     @ObsoleteCoroutinesApi

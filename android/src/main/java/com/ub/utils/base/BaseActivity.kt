@@ -2,8 +2,9 @@ package com.ub.utils.base
 
 import androidx.appcompat.app.AlertDialog
 import com.ub.utils.isNotShowing
+import moxy.MvpAppCompatActivity
 
-abstract class BaseActivity : MvpXActivity() {
+abstract class BaseActivity : MvpAppCompatActivity() {
 
     var alertDialog: AlertDialog? = null
 

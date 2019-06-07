@@ -1,6 +1,5 @@
 package com.ub.utils.ui.main.presenters
 
-import com.arellomobile.mvp.InjectViewState
 import com.ub.utils.LogUtils
 import com.ub.utils.base.BasePresenter
 import com.ub.utils.ui.main.views.MainView
@@ -11,6 +10,7 @@ import com.ub.utils.ui.main.repositories.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import moxy.InjectViewState
 import java.util.*
 import java.util.concurrent.TimeUnit
 

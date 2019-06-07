@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.9.4"
+    libraryVersion = "0.9.5"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -55,7 +55,7 @@ android {
     }
 }
 
-def verMoxy = '1.5.5'
+def verMoxy = '1.0.13'
 def verRetrofit = '2.5.0'
 def verDagger = '2.23'
 def verCoroutines='1.2.1'
@@ -81,8 +81,9 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // moxy
-    api "com.arello-mobile:moxy:$verMoxy"
-    api "com.arello-mobile:moxy-app-compat:$verMoxy"
+    api "com.github.moxy-community:moxy:$verMoxy"
+    api "com.github.moxy-community:moxy-androidx:$verMoxy"
+    api "com.github.moxy-community:moxy-material:$verMoxy"
 
     // retrofit 2
     api "com.squareup.retrofit2:retrofit:$verRetrofit"
