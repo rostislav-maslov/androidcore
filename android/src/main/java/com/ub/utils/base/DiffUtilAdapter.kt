@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 @Suppress("UNUSED")
 abstract class DiffUtilAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder> : ListAdapter<D, VH>(DiffCallback<D>()) {
 
+    var listener: BaseClickListener? = null
+
     fun update(list: List<D>) {
         this.submitList(list)
     }
