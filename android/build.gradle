@@ -10,7 +10,7 @@ ext {
 
     publishedGroupId = "com.unitbean.core"
     artifact = "android"
-    libraryVersion = "0.9.6"
+    libraryVersion = "0.9.7"
 
     libraryDescription = "Boilerplate Android code for UnitBean developers"
     siteUrl = 'https://github.com/unitbean/androidcore'
@@ -40,13 +40,13 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -57,7 +57,7 @@ android {
 
 def verMoxy = '1.0.13'
 def verRetrofit = '2.6.0'
-def verDagger = '2.23'
+def verDagger = '2.23.1'
 def verCoroutines='1.2.1'
 
 dependencies {
