@@ -57,7 +57,7 @@ android {
 
 def verMoxy = '1.0.13'
 def verRetrofit = '2.6.0'
-def verDagger = '2.23.1'
+def verDagger = '2.23.2'
 def verCoroutines='1.2.1'
 
 dependencies {
