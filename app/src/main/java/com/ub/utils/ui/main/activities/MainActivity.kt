@@ -1,5 +1,6 @@
 package com.ub.utils.ui.main.activities
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import android.view.View
@@ -22,6 +23,8 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.load()
+
+        presenter.loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1200px-Kotlin-logo.svg.png")
     }
 
     override fun done() {
@@ -41,6 +44,10 @@ class MainActivity : BaseActivity(), MainView {
                 setStyle(NotificationCompat.BigTextStyle().bigText(content.second))
             }
             .show(id = random.nextInt())
+    }
+
+    override fun showImage(image: Bitmap) {
+        iv_image.setImageBitmap(image)
     }
 
     fun showPush(v : View) {

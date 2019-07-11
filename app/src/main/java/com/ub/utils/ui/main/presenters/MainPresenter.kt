@@ -10,6 +10,7 @@ import com.ub.utils.ui.main.repositories.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -20,8 +21,12 @@ class MainPresenter : BasePresenter<MainView>() {
     private val interactor = MainInteractor(MainRepository())
     private val list = ArrayList<PostResponse>()
 
+    override fun onDestroy() {
+        subscriptions.clear()
+    }
+
     fun load() {
-        interactor.loadPosts()
+        val postsTask = interactor.loadPosts()
             .map {
                 list.renew(it)
             }
@@ -30,17 +35,31 @@ class MainPresenter : BasePresenter<MainView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ viewState.done() },
                 { LogUtils.e("POST", it.message ?: "Error", it) })
+        subscriptions.add(postsTask)
     }
 
     fun generatePushContent() {
-        interactor.generatePushContent(list)
+        val pushTask = interactor.generatePushContent(list)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Consumer { viewState.showPush(it) })
+        subscriptions.add(pushTask)
     }
 
     fun isEquals() {
-        interactor.isEquals()
+        val equalsTask = interactor.isEquals()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Consumer { viewState.isEquals(it) })
+        subscriptions.add(equalsTask)
+    }
+
+    fun loadImage(url: String) {
+        launch {
+            try {
+                val image = interactor.loadImage(url)
+                viewState.showImage(image)
+            } catch (e: Exception) {
+                LogUtils.e("ImageDownload", e.message, e)
+            }
+        }
     }
 }

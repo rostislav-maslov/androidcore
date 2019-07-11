@@ -1,5 +1,6 @@
 package com.ub.utils.ui.main.repositories
 
+import android.graphics.Bitmap
 import com.ub.utils.BaseApplication
 import com.ub.utils.di.services.ApiService
 import com.ub.utils.di.services.api.responses.PostResponse
@@ -16,5 +17,9 @@ class MainRepository : IMainRepository {
 
     override fun getPosts(): Single<List<PostResponse>> {
         return api.api.loadPosts()
+    }
+
+    override suspend fun getImage(url: String): Bitmap? {
+        return api.downloadImage(url)
     }
 }

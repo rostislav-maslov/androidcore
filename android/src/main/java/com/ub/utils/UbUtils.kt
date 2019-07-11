@@ -10,10 +10,17 @@ import android.os.Build
 import androidx.annotation.StringRes
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import kotlinx.coroutines.suspendCancellableCoroutine
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.HttpException
 import java.io.IOException
+import java.io.InputStream
 import java.net.NetworkInterface
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 @SuppressLint("StaticFieldLeak")
 object UbUtils {
@@ -264,3 +271,36 @@ fun isGpsIsEnabled(context: Context): Boolean {
 
     return networkLocationEnabled || gpsLocationEnabled
 }
+
+/**
+ * Coroutine-cancellable-реализация загрузки объекта из сети
+ *
+ * Процесс работы:
+ * 1. Загрузка по переданному [url] объекта [okhttp3.Response] с помощью [OkHttpClient]
+ * 2. Преобразование с помощью [objectMapper] в объект типа [T] с учетом возможного пустого ответа
+ * 3. Отдача в существующую корутину результата операции
+ *
+ * В случае отмены операции с помощью [okhttp3.Call.cancel] сетевой запрос отменяется, если возможно
+ */
+suspend fun <T> OkHttpClient.download(url: String, objectMapper: (byteStream: InputStream?) -> T?) =
+    suspendCancellableCoroutine<T?> { continuation ->
+        val request = Request.Builder().url(url).build()
+        val call = newCall(request)
+        call.enqueue(object : Callback {
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                if (!continuation.isCompleted) {
+                    continuation.resume(objectMapper.invoke(response.body()?.byteStream()))
+                }
+            }
+
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                if (!continuation.isCompleted) {
+                    continuation.resumeWithException(e)
+                }
+            }
+        })
+
+        continuation.invokeOnCancellation {
+            call.cancel()
+        }
+    }

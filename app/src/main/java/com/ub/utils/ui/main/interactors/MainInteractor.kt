@@ -1,5 +1,6 @@
 package com.ub.utils.ui.main.interactors
 
+import android.graphics.Bitmap
 import com.ub.utils.containsIgnoreCase
 import com.ub.utils.di.services.api.responses.PostResponse
 import com.ub.utils.ui.main.repositories.IMainRepository
@@ -25,5 +26,11 @@ class MainInteractor(private val repository: IMainRepository) : IMainInteractor 
                 val rnd = list[Random().nextInt(list.size)]
                 return@map Pair(rnd.title, rnd.body)
             }
+    }
+
+    override suspend fun loadImage(url: String): Bitmap {
+        val image = repository.getImage(url) ?: throw IllegalStateException("Image is null")
+
+        return image
     }
 }

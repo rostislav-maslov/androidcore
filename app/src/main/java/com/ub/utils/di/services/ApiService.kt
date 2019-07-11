@@ -1,6 +1,9 @@
 package com.ub.utils.di.services
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.ub.utils.di.services.api.responses.PostResponse
+import com.ub.utils.download
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,15 +15,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiService {
 
-    val api : Api
-
-    init {
-        val httpClient = OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build()
-
+    val api: Api by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
             .client(httpClient)
@@ -28,7 +23,21 @@ class ApiService {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        api = retrofit.create(ApiService.Api::class.java)
+        retrofit.create(ApiService.Api::class.java)
+    }
+
+    private val httpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build()
+    }
+
+    suspend fun downloadImage(url: String): Bitmap? {
+        return httpClient.download(url) {
+            return@download BitmapFactory.decodeStream(it)
+        }
     }
 
     interface Api {
