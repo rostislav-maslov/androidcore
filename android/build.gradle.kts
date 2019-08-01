@@ -14,7 +14,7 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "0.9.11")
+    set("libraryVersion", "0.9.12")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
@@ -60,7 +60,7 @@ android {
 }
 
 val verMoxy = "1.0.13"
-val verRetrofit = "2.6.0"
+val verRetrofit = "2.6.1"
 val verDagger = "2.23.2"
 val verCoroutines = "1.2.2"
 
