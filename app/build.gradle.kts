@@ -20,7 +20,7 @@ android {
 }
 
 val verMoxy = "1.0.13"
-val verDagger = "2.23"
+val verDagger = "2.24"
 
 dependencies {
     implementation(project(":android"))
