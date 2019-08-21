@@ -1,9 +1,9 @@
 package com.ub.utils.ui.main.views
 
 import android.graphics.Bitmap
-import com.ub.utils.base.BaseView
+import moxy.MvpView
 
-interface MainView : BaseView {
+interface MainView : MvpView {
     fun done()
     fun isEquals(equals: Boolean)
     fun showPush(content: Pair<String, String>)

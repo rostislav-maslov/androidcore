@@ -4,15 +4,16 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.ub.utils.*
-import com.ub.utils.base.BaseActivity
 import com.ub.utils.ui.main.presenters.MainPresenter
 import com.ub.utils.ui.main.views.MainView
 import kotlinx.android.synthetic.main.activity_main.*
+import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import java.util.*
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     @InjectPresenter
     lateinit var presenter : MainPresenter
@@ -28,11 +29,18 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun done() {
-        showMessage(message = "16 dp is ${btn_text_action.dpToPx(16)} in pixels", actionText = "Ok", action =  { presenter.isEquals() } )
+        AlertDialog.Builder(this)
+            .setMessage("16 dp is ${btn_text_action.dpToPx(16)} in pixels")
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                presenter.isEquals()
+            }
+            .show()
     }
 
     override fun isEquals(equals: Boolean) {
-        showError(message = "${UbUtils.getString(R.string.app_name)}. Equals $equals")
+        AlertDialog.Builder(this)
+            .setMessage("${UbUtils.getString(R.string.app_name)}. Equals $equals")
+            .show()
     }
 
     override fun showPush(content: Pair<String, String>) {

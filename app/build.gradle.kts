@@ -21,6 +21,8 @@ android {
 
 val verMoxy = "1.0.13"
 val verDagger = "2.24"
+val verRetrofit = "2.6.1"
+val verCoroutines = "1.2.2"
 
 dependencies {
     implementation(project(":android"))
@@ -34,4 +36,37 @@ dependencies {
     // kapts
     kapt("com.github.moxy-community:moxy-compiler:$verMoxy")
     kapt("com.google.dagger:dagger-compiler:$verDagger")
+
+    // android x
+    implementation("androidx.appcompat:appcompat:1.0.2")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.android.material:material:1.0.0")
+    implementation("androidx.vectordrawable:vectordrawable:1.0.1")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+
+    // moxy
+    implementation("com.github.moxy-community:moxy:$verMoxy")
+    implementation("com.github.moxy-community:moxy-androidx:$verMoxy")
+    implementation("com.github.moxy-community:moxy-material:$verMoxy")
+
+    // retrofit 2
+    implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$verRetrofit")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$verRetrofit")
+
+    // logging interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
+
+    // rx android
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
+
+    // dagger 2
+    implementation("com.google.dagger:dagger:$verDagger")
+
+    // kotlin coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$verCoroutines")
 }

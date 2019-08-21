@@ -1,6 +1,7 @@
 package com.ub.utils
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import android.util.Property
 import android.util.TypedValue
@@ -9,6 +10,10 @@ import io.reactivex.disposables.Disposable
 
 fun View.dpToPx(dp : Int): Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), this.context.resources.displayMetrics)
+}
+
+fun Context.dpToPx(dp : Int): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), this.resources.displayMetrics)
 }
 
 inline val View.visible: View

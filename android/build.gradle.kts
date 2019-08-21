@@ -14,7 +14,7 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "0.9.13")
+    set("libraryVersion", "1.0")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
@@ -60,9 +60,10 @@ android {
 }
 
 val verMoxy = "1.0.13"
-val verRetrofit = "2.6.1"
+val verOkHttp = "3.14.2"
 val verDagger = "2.24"
 val verCoroutines = "1.2.2"
+val verRetrofit = "2.6.1"
 
 dependencies {
     testImplementation("junit:junit:4.12")
@@ -75,38 +76,19 @@ dependencies {
 
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
 
-    // android x
-    api("androidx.appcompat:appcompat:1.0.2")
-    api("androidx.legacy:legacy-support-v4:1.0.0")
-    api("androidx.recyclerview:recyclerview:1.0.0")
-    api("androidx.cardview:cardview:1.0.0")
-    api("com.google.android.material:material:1.0.0")
-    api("androidx.vectordrawable:vectordrawable:1.0.1")
-    api("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.appcompat:appcompat:1.0.2")
 
     // moxy
-    api("com.github.moxy-community:moxy:$verMoxy")
-    api("com.github.moxy-community:moxy-androidx:$verMoxy")
-    api("com.github.moxy-community:moxy-material:$verMoxy")
+    implementation("com.github.moxy-community:moxy:$verMoxy")
 
     // retrofit 2
-    api("com.squareup.retrofit2:retrofit:$verRetrofit")
-    api("com.squareup.retrofit2:converter-gson:$verRetrofit")
-    api("com.squareup.retrofit2:adapter-rxjava2:$verRetrofit")
-
-    // logging interceptor
-    api("com.squareup.okhttp3:logging-interceptor:3.12.1")
+    implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
 
     // rx android
-    api("io.reactivex.rxjava2:rxandroid:2.1.1")
-    api("io.reactivex.rxjava2:rxjava:2.2.10")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
 
-    // dagger 2
-    api("com.google.dagger:dagger:$verDagger")
-
-    // kotlin coroutines
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$verCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
 }
 
 /**

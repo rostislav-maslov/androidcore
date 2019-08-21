@@ -282,7 +282,7 @@ fun isGpsIsEnabled(context: Context): Boolean {
  *
  * В случае отмены операции с помощью [okhttp3.Call.cancel] сетевой запрос отменяется, если возможно
  */
-suspend fun <T> OkHttpClient.download(url: String, objectMapper: (byteStream: InputStream?) -> T?) =
+suspend inline fun <T> OkHttpClient.download(url: String, crossinline objectMapper: (byteStream: InputStream?) -> T?) =
     suspendCancellableCoroutine<T?> { continuation ->
         val request = Request.Builder().url(url).build()
         val call = newCall(request)
