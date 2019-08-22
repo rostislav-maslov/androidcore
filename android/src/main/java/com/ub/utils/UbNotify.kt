@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 
 @Suppress("DEPRECATION", "UNUSED")
@@ -89,6 +90,41 @@ object UbNotify {
                 } else {
                     it.notify(tag, id, build())
                 }
+            }
+        }
+    }
+
+    class ChannelCreator(private val context: Context) {
+
+        private val manager: NotificationManager? by lazy { context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager? }
+        private val initializer = ChannelInitializer()
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun create(builder: (ChannelInitializer.() -> Unit)) {
+            builder.invoke(initializer)
+            manager?.createNotificationChannels(initializer.channelsToCreate)
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun clearAllChannels() {
+            val channels = manager?.notificationChannels ?: return
+            channels.forEach {
+                manager?.deleteNotificationChannel(it.id)
+            }
+        }
+
+        class ChannelInitializer {
+
+            val channelsToCreate = ArrayList<NotificationChannel>()
+
+            @RequiresApi(Build.VERSION_CODES.O)
+            fun addNewChannel(id: String, name: String, priority: Int = NotificationManager.IMPORTANCE_HIGH, channelConfigurator: (NotificationChannel.() -> Unit)? = null): ChannelInitializer {
+                val channel = NotificationChannel(id, name, priority).apply {
+                    channelConfigurator?.invoke(this)
+                }
+                channelsToCreate.add(channel)
+
+                return this
             }
         }
     }

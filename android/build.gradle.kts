@@ -60,7 +60,6 @@ android {
 }
 
 val verMoxy = "1.0.13"
-val verOkHttp = "3.14.2"
 val verDagger = "2.24"
 val verCoroutines = "1.2.2"
 val verRetrofit = "2.6.1"
