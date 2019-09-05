@@ -22,7 +22,7 @@ android {
 val verMoxy = "1.0.13"
 val verDagger = "2.24"
 val verRetrofit = "2.6.1"
-val verCoroutines = "1.2.2"
+val verCoroutines = "1.3.0"
 
 dependencies {
     implementation(project(":android"))
@@ -61,7 +61,7 @@ dependencies {
 
     // rx android
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.12")
 
     // dagger 2
     implementation("com.google.dagger:dagger:$verDagger")
