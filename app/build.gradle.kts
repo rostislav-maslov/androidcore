@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(29)
     defaultConfig {
         applicationId = "com.ub.utils"
         minSdkVersion(16)
-        targetSdkVersion(28)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -22,7 +22,7 @@ android {
 val verMoxy = "1.0.13"
 val verDagger = "2.24"
 val verRetrofit = "2.6.1"
-val verCoroutines = "1.3.0"
+val verCoroutines = "1.3.1"
 
 dependencies {
     implementation(project(":android"))
@@ -38,7 +38,7 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$verDagger")
 
     // android x
-    implementation("androidx.appcompat:appcompat:1.0.2")
+    implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")

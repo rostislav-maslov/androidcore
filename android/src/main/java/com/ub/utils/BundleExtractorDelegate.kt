@@ -1,5 +1,6 @@
 package com.ub.utils
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlin.properties.ReadWriteProperty
@@ -12,6 +13,18 @@ inline fun <reified T> argument(
     BundleExtractorDelegate { thisRef ->
         extractFromBundle(
             bundle = thisRef.arguments,
+            key = key,
+            defaultValue = defaultValue
+        )
+    }
+
+internal inline fun <reified T> extra(
+    key: String,
+    defaultValue: T? = null
+): ReadWriteProperty<Activity, T> =
+    BundleExtractorDelegate { thisRef ->
+        extractFromBundle(
+            bundle = thisRef.intent.extras,
             key = key,
             defaultValue = defaultValue
         )

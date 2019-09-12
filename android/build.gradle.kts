@@ -14,7 +14,7 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "1.1.0")
+    set("libraryVersion", "1.2.0")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
@@ -32,11 +32,11 @@ repositories {
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(29)
 
     defaultConfig {
         minSdkVersion(16)
-        targetSdkVersion(28)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = extra.get("libraryVersion") as String
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -61,7 +61,7 @@ android {
 
 val verMoxy = "1.0.13"
 val verDagger = "2.24"
-val verCoroutines = "1.3.0"
+val verCoroutines = "1.3.1"
 val verRetrofit = "2.6.1"
 
 dependencies {
@@ -76,7 +76,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
 
     implementation("androidx.recyclerview:recyclerview:1.0.0")
-    implementation("androidx.appcompat:appcompat:1.0.2")
+    implementation("androidx.appcompat:appcompat:1.1.0")
 
     // moxy
     implementation("com.github.moxy-community:moxy:$verMoxy")
