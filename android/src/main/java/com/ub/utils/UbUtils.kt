@@ -63,8 +63,8 @@ object UbUtils {
         context?.let {
             val clipManager = it.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
             val clipData = ClipData.newPlainText("text", text)
-            clipManager?.let {
-                it.primaryClip = clipData
+            clipManager?.let { manager ->
+                manager.setPrimaryClip(clipData)
 
                 return true
             }
