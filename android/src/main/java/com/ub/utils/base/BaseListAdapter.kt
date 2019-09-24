@@ -13,7 +13,7 @@ abstract class BaseListAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder>
     var listListener: BaseListClickListener<D>? = null
 
     fun update(list: List<D>) {
-        this.submitList(list)
+        this.submitList(ArrayList(list))
     }
 
     @SuppressLint("DiffUtilEquals")

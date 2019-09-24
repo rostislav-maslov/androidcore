@@ -19,9 +19,9 @@ android {
     }
 }
 
-val verMoxy = "1.0.13"
+val verMoxy = "2.0.2"
 val verDagger = "2.24"
-val verRetrofit = "2.6.1"
+val verRetrofit = "2.6.2"
 val verCoroutines = "1.3.1"
 
 dependencies {
