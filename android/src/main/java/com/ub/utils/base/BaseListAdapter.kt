@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("UNUSED")
-abstract class BaseListAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder> : ListAdapter<D, VH>(DiffCallback<D>()) {
+abstract class BaseListAdapter<D : DiffComparable, VH : RecyclerView.ViewHolder>
+@JvmOverloads
+constructor(differ: DiffUtil.ItemCallback<D> = DiffCallback()) : ListAdapter<D, VH>(differ) {
 
     var listener: BaseClickListener? = null
     var listListener: BaseListClickListener<D>? = null
