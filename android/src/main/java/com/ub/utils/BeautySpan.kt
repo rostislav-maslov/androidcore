@@ -16,6 +16,12 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 
+fun Context.spannableBuilder(builder: (SpannableStringCreator.() -> Unit)): SpannableString {
+    return SpannableStringCreator(this).apply {
+        builder.invoke(this)
+    }.toSpannableString()
+}
+
 class SpannableStringCreator(private val context: Context) {
     private val parts = ArrayList<CharSequence>()
     private var length = 0
