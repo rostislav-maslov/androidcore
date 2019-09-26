@@ -35,6 +35,12 @@ fun <T>MutableList<T>.renew(list: Collection<T>): MutableList<T> {
     return this
 }
 
+fun <K, V>MutableMap<K, V>.renew(map: Map<K, V>): MutableMap<K, V> {
+    clear()
+    putAll(map)
+    return this
+}
+
 fun Collection<String>.containsIgnoreCase(value: String): Boolean {
     return this
         .firstOrNull()
@@ -42,10 +48,10 @@ fun Collection<String>.containsIgnoreCase(value: String): Boolean {
         ?: false
 }
 
-fun <T : View> T.animator(property: Property<T, Float>, vararg values: Float): ObjectAnimator {
-    return ObjectAnimator.ofFloat(this, property, *values)
-}
+fun <T : View> T.animator(property: Property<T, Float>, vararg values: Float): ObjectAnimator = ObjectAnimator.ofFloat(this, property, *values)
 
-fun <T : View> T.animator(property: String, vararg values: Float): ObjectAnimator {
-    return ObjectAnimator.ofFloat(this, property, *values)
-}
+fun <T : View> T.animator(property: String, vararg values: Float): ObjectAnimator = ObjectAnimator.ofFloat(this, property, *values)
+
+fun <T : View> T.animator(property: Property<T, Int>, vararg values: Int): ObjectAnimator = ObjectAnimator.ofInt(this, property, *values)
+
+fun <T : View> T.animator(property: String, vararg values: Int): ObjectAnimator = ObjectAnimator.ofInt(this, property, *values)
