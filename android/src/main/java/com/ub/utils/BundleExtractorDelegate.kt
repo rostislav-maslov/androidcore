@@ -18,7 +18,7 @@ inline fun <reified T> argument(
         )
     }
 
-internal inline fun <reified T> extra(
+inline fun <reified T> extra(
     key: String,
     defaultValue: T? = null
 ): ReadWriteProperty<Activity, T> =
