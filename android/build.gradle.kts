@@ -14,7 +14,7 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "1.4.0")
+    set("libraryVersion", "1.4.1")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
@@ -60,15 +60,15 @@ android {
 }
 
 val verMoxy = "2.0.2"
-val verDagger = "2.24"
-val verCoroutines = "1.3.1"
+val verDagger = "2.25.2"
+val verCoroutines = "1.3.2"
 val verRetrofit = "2.6.2"
 
 dependencies {
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-    testImplementation("org.mockito:mockito-core:3.0.0")
+    testImplementation("org.mockito:mockito-core:3.1.0")
     testImplementation("org.assertj:assertj-core:3.9.1")
     testImplementation("org.robolectric:robolectric:4.3")
     testImplementation("org.robolectric:shadows-support-v4:3.3.2")
@@ -85,7 +85,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
 
     // rx android
-    implementation("io.reactivex.rxjava2:rxjava:2.2.12")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.13")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
 }
