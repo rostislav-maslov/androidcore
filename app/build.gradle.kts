@@ -44,7 +44,7 @@ dependencies {
     // android x
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable:1.1.0")
@@ -65,7 +65,7 @@ dependencies {
 
     // rx android
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.13")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.14")
 
     // dagger 2
     implementation("com.google.dagger:dagger:$verDagger")

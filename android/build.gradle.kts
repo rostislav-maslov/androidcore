@@ -75,7 +75,7 @@ dependencies {
 
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
 
-    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.appcompat:appcompat:1.1.0")
 
     // moxy
@@ -85,7 +85,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
 
     // rx android
-    implementation("io.reactivex.rxjava2:rxjava:2.2.13")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.14")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
 }
