@@ -10,6 +10,7 @@ import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.TextPaint
 import android.text.TextUtils.concat
 import android.text.style.*
+import android.util.TypedValue
 import android.view.View
 import androidx.annotation.*
 import androidx.appcompat.content.res.AppCompatResources
@@ -113,6 +114,19 @@ class ResSpans(private val context: Context) : Iterable<Any> {
 
     fun size(@DimenRes id: Int) =
         spans.add(AbsoluteSizeSpan(context.resources.getDimension(id).toInt()))
+
+    fun size(sizeInSp: Float) =
+        spans.add(AbsoluteSizeSpan(TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sizeInSp,
+            context.resources.displayMetrics
+        ).toInt()))
+
+    fun underline() =
+        spans.add(UnderlineSpan())
+
+    fun strikethrough() =
+        spans.add(StrikethroughSpan())
 
     fun color(@ColorRes id: Int) =
         spans.add(ForegroundColorSpan(ContextCompat.getColor(context, id)))

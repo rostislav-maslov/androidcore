@@ -1,6 +1,7 @@
 package com.ub.utils.ui.main.activities
 
 import android.graphics.Bitmap
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import android.view.View
@@ -30,7 +31,26 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun done() {
         AlertDialog.Builder(this)
-            .setMessage("16 dp is ${btn_text_action.dpToPx(16)} in pixels")
+            .setMessage(spannableBuilder {
+                append("20sp text") {
+                    size(20F)
+                }
+                appendSpace("with")
+                appendSpace("underline") {
+                    underline()
+                }
+                appendSpace("and")
+                appendSpace("strikethrough") {
+                    strikethrough()
+                }
+                appendLn("Bold text") {
+                    typeface(Typeface.DEFAULT_BOLD)
+                }
+                appendSpace("blue yeti") {
+                    color(android.R.color.holo_blue_light)
+                    size(10F)
+                }
+            })
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 presenter.isEquals()
             }

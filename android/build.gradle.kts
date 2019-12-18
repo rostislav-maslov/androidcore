@@ -14,7 +14,7 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "1.4.1")
+    set("libraryVersion", "1.4.2")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
@@ -60,15 +60,15 @@ android {
 }
 
 val verMoxy = "2.0.2"
-val verDagger = "2.25.2"
-val verCoroutines = "1.3.2"
-val verRetrofit = "2.6.2"
+val verDagger = "2.25.3"
+val verCoroutines = "1.3.3"
+val verRetrofit = "2.6.3"
 
 dependencies {
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-    testImplementation("org.mockito:mockito-core:3.1.0")
+    testImplementation("org.mockito:mockito-core:3.2.0")
     testImplementation("org.assertj:assertj-core:3.9.1")
     testImplementation("org.robolectric:robolectric:4.3")
     testImplementation("org.robolectric:shadows-support-v4:3.3.2")
@@ -77,6 +77,7 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("androidx.core:core-ktx:1.2.0-rc01")
 
     // moxy
     implementation("com.github.moxy-community:moxy:$verMoxy")
@@ -85,7 +86,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
 
     // rx android
-    implementation("io.reactivex.rxjava2:rxjava:2.2.14")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.15")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
 }

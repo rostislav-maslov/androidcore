@@ -2,17 +2,21 @@ package com.ub.utils
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import androidx.appcompat.app.AlertDialog
+import android.graphics.drawable.Drawable
 import android.util.Property
 import android.util.TypedValue
 import android.view.View
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import io.reactivex.disposables.Disposable
 
-fun View.dpToPx(dp : Int): Float {
+fun View.dpToPx(dp: Int): Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), this.context.resources.displayMetrics)
 }
 
-fun Context.dpToPx(dp : Int): Float {
+fun Context.dpToPx(dp: Int): Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), this.resources.displayMetrics)
 }
 
@@ -29,13 +33,13 @@ fun AlertDialog.isNotShowing(): Boolean = !isShowing
 
 fun Disposable.isNotDisposed(): Boolean = !isDisposed
 
-fun <T>MutableList<T>.renew(list: Collection<T>): MutableList<T> {
+fun <T> MutableList<T>.renew(list: Collection<T>): MutableList<T> {
     clear()
     addAll(list)
     return this
 }
 
-fun <K, V>MutableMap<K, V>.renew(map: Map<K, V>): MutableMap<K, V> {
+fun <K, V> MutableMap<K, V>.renew(map: Map<K, V>): MutableMap<K, V> {
     clear()
     putAll(map)
     return this
@@ -55,3 +59,7 @@ fun <T : View> T.animator(property: String, vararg values: Float): ObjectAnimato
 fun <T : View> T.animator(property: Property<T, Int>, vararg values: Int): ObjectAnimator = ObjectAnimator.ofInt(this, property, *values)
 
 fun <T : View> T.animator(property: String, vararg values: Int): ObjectAnimator = ObjectAnimator.ofInt(this, property, *values)
+
+fun Drawable.colorize(@ColorInt colorInt: Int) {
+    colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorInt, BlendModeCompat.SRC_IN)
+}
