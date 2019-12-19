@@ -24,6 +24,7 @@ Collection<String>.containsIgnoreCase(value: String): Boolean
 View.animator(property Property<T, Float>, vararg values Float): ObjectAnimator
 View.animator(property String, vararg values Float): ObjectAnimator
 OkHttpClient.download(url: String, crossinline objectMapper: (byteStream: InputStream?) -> T?)
+Drawable.colorize(colorInt: Int)
 ```
 - Удобные Extension-функции для работы с `java.util.Calendar`:
 ```kotlin
