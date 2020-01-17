@@ -1,18 +1,32 @@
-package com.ub.utils.ui.main.activities
+package com.ub.utils.ui.main
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.ub.utils.*
-import com.ub.utils.ui.main.presenters.MainPresenter
-import com.ub.utils.ui.main.views.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
+import moxy.MvpView
 import moxy.presenter.InjectPresenter
+import moxy.viewstate.strategy.OneExecutionStateStrategy
+import moxy.viewstate.strategy.StateStrategyType
 import java.util.*
+
+@StateStrategyType(OneExecutionStateStrategy::class)
+interface MainView : MvpView {
+    fun done()
+    fun isEquals(equals: Boolean)
+    fun showPush(content: Pair<String, String>)
+    fun showImage(image: Bitmap)
+    fun onConnectivityChange(state: String)
+}
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
@@ -27,6 +41,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         presenter.load()
 
         presenter.loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1200px-Kotlin-logo.svg.png")
+
+        presenter.networkTest(this)
     }
 
     override fun done() {
@@ -76,6 +92,27 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun showImage(image: Bitmap) {
         iv_image.setImageBitmap(image)
+    }
+
+    override fun onConnectivityChange(state: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = when (state) {
+                CNetwork.State.ACTIVE -> ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark)
+                CNetwork.State.DISABLE -> Color.RED
+                CNetwork.State.CAPTIVE -> Color.GREEN
+                else -> Color.YELLOW
+            }
+        }
+        supportActionBar?.setBackgroundDrawable(
+            GradientDrawable().apply {
+                setColor(when (state) {
+                    CNetwork.State.ACTIVE -> ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+                    CNetwork.State.DISABLE -> Color.RED
+                    CNetwork.State.CAPTIVE -> Color.GREEN
+                    else -> Color.YELLOW
+                })
+            }
+        )
     }
 
     fun showPush(v : View) {

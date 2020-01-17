@@ -24,8 +24,8 @@ android {
 }
 
 val verMoxy = "2.0.2"
-val verDagger = "2.25.3"
-val verRetrofit = "2.6.3"
+val verDagger = "2.25.4"
+val verRetrofit = "2.6.4"
 val verCoroutines = "1.3.3"
 
 dependencies {
@@ -33,7 +33,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
 
     // testing
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 
@@ -65,7 +65,7 @@ dependencies {
 
     // rx android
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.15")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.17")
 
     // dagger 2
     implementation("com.google.dagger:dagger:$verDagger")

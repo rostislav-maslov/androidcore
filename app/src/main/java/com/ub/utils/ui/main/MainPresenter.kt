@@ -1,17 +1,17 @@
-package com.ub.utils.ui.main.presenters
+package com.ub.utils.ui.main
 
+import android.content.Context
 import com.ub.utils.LogUtils
-import com.ub.utils.ui.main.views.MainView
+import com.ub.utils.cNetwork
 import com.ub.utils.di.services.api.responses.PostResponse
 import com.ub.utils.renew
-import com.ub.utils.ui.main.interactors.MainInteractor
-import com.ub.utils.ui.main.repositories.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
@@ -51,6 +51,20 @@ class MainPresenter : MvpPresenter<MainView>(), CoroutineScope {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Consumer { viewState.showPush(it) })
         subscriptions.add(pushTask)
+    }
+
+    fun networkTest(context: Context) {
+        launch {
+            try {
+                val network = context.cNetwork
+
+                network.startListener().collect {
+                    viewState.onConnectivityChange(it)
+                }
+            } catch (e: Exception) {
+                LogUtils.e("NetworkTest", e.message, e)
+            }
+        }
     }
 
     fun isEquals() {
