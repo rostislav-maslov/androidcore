@@ -1,6 +1,7 @@
 package com.ub.utils.ui.main
 
 import android.content.Context
+import com.ub.utils.BaseApplication
 import com.ub.utils.LogUtils
 import com.ub.utils.cNetwork
 import com.ub.utils.di.services.api.responses.PostResponse
@@ -8,42 +9,49 @@ import com.ub.utils.renew
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import moxy.InjectViewState
+import kotlinx.coroutines.withContext
 import moxy.MvpPresenter
+import moxy.presenterScope
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Inject
 
-@InjectViewState
-class MainPresenter : MvpPresenter<MainView>(), CoroutineScope {
+class MainPresenter(private val urlToLoad: String) : MvpPresenter<MainView>() {
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
-
-    private val interactor = MainInteractor(MainRepository())
+    @Inject
+    lateinit var interactor: MainInteractor
     private val list = ArrayList<PostResponse>()
     private val subscriptions = CompositeDisposable()
 
+    init {
+        BaseApplication.getMainSubcomponent().inject(this)
+    }
+
     override fun onDestroy() {
         subscriptions.clear()
+
+        BaseApplication.clearMainSubcomponent()
     }
 
     fun load() {
-        val postsTask = interactor.loadPosts()
-            .map {
-                list.renew(it)
+        presenterScope.launch {
+            try {
+                val posts = withContext(Dispatchers.IO) {
+                    interactor.loadPosts()
+                }
+
+                list.renew(posts)
+
+                delay(100)
+
+                viewState.done()
+            } catch (e: Exception) {
+                LogUtils.e("POST", e.message ?: "Error", e)
             }
-            .subscribeOn(Schedulers.io())
-            .delay(100, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ viewState.done() },
-                { LogUtils.e("POST", it.message ?: "Error", it) })
-        subscriptions.add(postsTask)
+        }
     }
 
     fun generatePushContent() {
@@ -54,7 +62,7 @@ class MainPresenter : MvpPresenter<MainView>(), CoroutineScope {
     }
 
     fun networkTest(context: Context) {
-        launch {
+        presenterScope.launch {
             try {
                 val network = context.cNetwork
 
@@ -74,10 +82,10 @@ class MainPresenter : MvpPresenter<MainView>(), CoroutineScope {
         subscriptions.add(equalsTask)
     }
 
-    fun loadImage(url: String) {
-        launch {
+    fun loadImage() {
+        presenterScope.launch {
             try {
-                val image = interactor.loadImage(url)
+                val image = interactor.loadImage(urlToLoad)
                 viewState.showImage(image)
             } catch (e: Exception) {
                 LogUtils.e("ImageDownload", e.message, e)

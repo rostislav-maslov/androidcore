@@ -8,7 +8,7 @@ import java.util.*
 
 class MainInteractor(private val repository: IMainRepository) {
 
-    fun loadPosts(): Single<List<PostResponse>> {
+    suspend fun loadPosts(): List<PostResponse> {
         return repository.getPosts()
     }
 

@@ -23,8 +23,8 @@ android {
     }
 }
 
-val verMoxy = "2.0.2"
-val verDagger = "2.25.4"
+val verMoxy = "2.1.1"
+val verDagger = "2.26"
 val verRetrofit = "2.6.4"
 val verCoroutines = "1.3.3"
 
@@ -54,6 +54,7 @@ dependencies {
     implementation("com.github.moxy-community:moxy:$verMoxy")
     implementation("com.github.moxy-community:moxy-androidx:$verMoxy")
     implementation("com.github.moxy-community:moxy-material:$verMoxy")
+    implementation("com.github.moxy-community:moxy-ktx:$verMoxy")
 
     // retrofit 2
     implementation("com.squareup.retrofit2:retrofit:$verRetrofit")

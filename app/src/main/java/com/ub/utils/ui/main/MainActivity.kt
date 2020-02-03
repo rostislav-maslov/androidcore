@@ -14,7 +14,7 @@ import com.ub.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
 import moxy.MvpView
-import moxy.presenter.InjectPresenter
+import moxy.ktx.moxyPresenter
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import java.util.*
@@ -30,9 +30,16 @@ interface MainView : MvpView {
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    @InjectPresenter
-    lateinit var presenter : MainPresenter
+    private val presenter: MainPresenter by moxyPresenter {
+        MainPresenter(images[random.nextInt(images.size)])
+    }
 
+    private val images: Array<String> by lazy {
+        arrayOf(
+            "https://tagline.ru/file/company/logo/unitbean-logo_tagline.png",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1200px-Kotlin-logo.svg.png"
+        )
+    }
     private val random = Random()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +47,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         presenter.load()
 
-        presenter.loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1200px-Kotlin-logo.svg.png")
+        presenter.loadImage()
 
         presenter.networkTest(this)
     }

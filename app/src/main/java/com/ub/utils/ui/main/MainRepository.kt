@@ -1,27 +1,19 @@
 package com.ub.utils.ui.main
 
 import android.graphics.Bitmap
-import com.ub.utils.BaseApplication
 import com.ub.utils.di.services.ApiService
 import com.ub.utils.di.services.api.responses.PostResponse
 import io.reactivex.Single
-import javax.inject.Inject
 
 interface IMainRepository {
 
-    fun getPosts(): Single<List<PostResponse>>
+    suspend fun getPosts(): List<PostResponse>
     suspend fun getImage(url: String): Bitmap?
 }
 
-class MainRepository : IMainRepository {
+class MainRepository(private val api : ApiService) : IMainRepository {
 
-    @Inject lateinit var api : ApiService
-
-    init {
-        BaseApplication.appComponent.inject(this)
-    }
-
-    override fun getPosts(): Single<List<PostResponse>> {
+    override suspend fun getPosts(): List<PostResponse> {
         return api.api.loadPosts()
     }
 
