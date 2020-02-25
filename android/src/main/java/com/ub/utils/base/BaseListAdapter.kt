@@ -28,3 +28,7 @@ constructor(differ: DiffUtil.ItemCallback<D> = DiffCallback()) : ListAdapter<D, 
         fun onClick(view: View, item: D, position: Int)
     }
 }
+
+interface DiffComparable {
+    fun getItemId(): Int
+}

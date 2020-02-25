@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED")
+
 package com.ub.utils
 
 import android.app.Activity

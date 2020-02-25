@@ -14,14 +14,14 @@ extra.apply {
 
     set("publishedGroupId", "com.unitbean.core")
     set("artifact", "android")
-    set("libraryVersion", "1.5.0")
+    set("libraryVersion", "1.6.0")
 
     set("libraryDescription", "Boilerplate Android code for UnitBean developers")
     set("siteUrl", "https://github.com/unitbean/androidcore")
     set("gitUrl", "https://github.com/unitbean/androidcore.git")
     set("developerId", "UnitBean")
     set("developerName", "Android developer")
-    set("developerEmail", "pocteg@gmail.com")
+    set("developerEmail", "info@unitbean.com")
     set("licenseName", "The Apache Software License, Version 2.0")
     set("licenseUrl", "http://www.apache.org/licenses/LICENSE-2.0.txt")
     set("allLicenses", arrayOf("Apache-2.0"))
@@ -65,29 +65,20 @@ val verCoroutines = "1.3.3"
 val verRetrofit = "2.6.4"
 
 dependencies {
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
     testImplementation("org.mockito:mockito-core:3.2.4")
     testImplementation("org.assertj:assertj-core:3.11.1")
-    testImplementation("org.robolectric:robolectric:4.3")
-    testImplementation("org.robolectric:shadows-support-v4:3.3.2")
 
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
 
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("androidx.core:core-ktx:1.2.0-rc01")
-
-    // moxy
+    implementation("androidx.core:core-ktx:1.2.0")
     implementation("com.github.moxy-community:moxy:$verMoxy")
-
-    // retrofit 2
     implementation("com.squareup.retrofit2:retrofit:$verRetrofit")
-
-    // rx android
     implementation("io.reactivex.rxjava2:rxjava:2.2.17")
-
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$verCoroutines")
 }
 

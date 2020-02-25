@@ -1,11 +1,13 @@
 package com.ub.utils.ui.main
 
 import android.content.Context
-import com.ub.utils.BaseApplication
-import com.ub.utils.LogUtils
-import com.ub.utils.cNetwork
+import android.os.Build
+import android.os.SystemClock
+import com.ub.utils.*
 import com.ub.utils.di.services.api.responses.PostResponse
-import com.ub.utils.renew
+import com.ub.security.AesGcmEncryption
+import com.ub.security.AuthenticatedEncryption
+import com.ub.security.toSecretKey
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
@@ -85,11 +87,35 @@ class MainPresenter(private val urlToLoad: String) : MvpPresenter<MainView>() {
     fun loadImage() {
         presenterScope.launch {
             try {
-                val image = interactor.loadImage(urlToLoad)
+                val url = testAes(urlToLoad)
+                val image = interactor.loadImage(url)
                 viewState.showImage(image)
             } catch (e: Exception) {
                 LogUtils.e("ImageDownload", e.message, e)
             }
         }
+    }
+
+    private fun testAes(textToTest: String): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            LogUtils.d("AES/GCM", "Encryption test started")
+            val startTime = SystemClock.uptimeMillis()
+            val key = "test".toSecretKey()
+            val encryption: AuthenticatedEncryption = AesGcmEncryption()
+            val encrypted = encryption.encrypt(
+                urlToLoad.toByteArray(charset("UTF-8")),
+                key
+            )
+            val encryptTime = SystemClock.uptimeMillis()
+            LogUtils.d("AES/GCM", "Time to encrypt is ${encryptTime - startTime}")
+            val decryption: AuthenticatedEncryption = AesGcmEncryption()
+            val decrypted = decryption.decrypt(
+                encrypted,
+                key
+            )
+            val decryptTime = SystemClock.uptimeMillis()
+            LogUtils.d("AES/GCM", "Time to decrypt is ${decryptTime - encryptTime}")
+            return String(decrypted)
+        } else textToTest
     }
 }
